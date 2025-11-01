@@ -25,18 +25,18 @@ module RawStep {
             _sessionService.initialize();
             _loadSettings();
             if (state != null) {
-                foreach (var key, var value in state) {
-                    _state[key] = value;
+                var keys = state.keys();
+                for (var i = 0; i < keys.size(); i += 1) {
+                    var key = keys[i];
+                    _state[key] = state[key];
                 }
             }
             if (_view == null) {
                 _view = new MainView(_state, _detector, _sessionService);
             }
-            return [_view];
         }
 
         function onStop(state) {
-            return _state;
         }
 
         function onPause() {

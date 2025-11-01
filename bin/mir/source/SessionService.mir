@@ -1,0 +1,245 @@
+[ @file = "/Users/oliverkoeth/work/vert-fairy/source/SessionService.mc"; @line = 1; @symbol_usingdef<0> = [Toybox,1,6,12]; @symbol_usingdef<1> = [ActivityRecording,1,13,30]; @symbol_usingAlias = [ActivityRecording,1,34,51]; ]
+using Toybox.ActivityRecording as :ActivityRecording;
+[ @file = "/Users/oliverkoeth/work/vert-fairy/source/SessionService.mc"; @line = 3; @symbol_moduledef = [RawStep,3,7,14]; ]
+module RawStep {
+    [ @file = "/Users/oliverkoeth/work/vert-fairy/source/SessionService.mc"; @line = 3; ]
+    <init> {
+    }
+    [ @file = "/Users/oliverkoeth/work/vert-fairy/source/SessionService.mc"; @line = 4; @symbol_classdef = [SessionService,4,10,24]; ]
+    class SessionService {
+        [ @file = "/Users/oliverkoeth/work/vert-fairy/source/SessionService.mc"; @line = 4; ]
+        <init> {
+        }
+        [ @file = "/Users/oliverkoeth/work/vert-fairy/source/SessionService.mc"; @line = 4; ]
+        static
+        <init> {
+        }
+        [ @file = "/Users/oliverkoeth/work/vert-fairy/source/SessionService.mc"; @line = 5; @position = 12; @symbol_vardef = [_session,5,12,20]; ]
+        var _session;
+        [ @file = "/Users/oliverkoeth/work/vert-fairy/source/SessionService.mc"; @line = 6; @position = 12; @symbol_vardef = [_supported,6,12,22]; ]
+        var _supported;
+        [ @file = "/Users/oliverkoeth/work/vert-fairy/source/SessionService.mc"; @line = 7; @position = 12; @symbol_vardef = [_errorMessage,7,12,25]; ]
+        var _errorMessage;
+        [ @file = "/Users/oliverkoeth/work/vert-fairy/source/SessionService.mc"; @line = 9; @symbol_functiondef = [initialize,9,17,27]; ]
+        function initialize() as Void {
+_Users_oliverkoeth_work_vert_fairy_source_SessionService_mc_9_30_13_8_start:
+[ "/Users/oliverkoeth/work/vert-fairy/source/SessionService.mc" 10 12 ]
+            %tmp.1 = null;
+            symbol [ _session ? 10 12 20 ];
+            putv self :_session %tmp.1;
+[ "/Users/oliverkoeth/work/vert-fairy/source/SessionService.mc" 11 12 ]
+            %tmp.2 = null;
+            symbol [ _errorMessage ? 11 12 25 ];
+            putv self :_errorMessage %tmp.2;
+[ "/Users/oliverkoeth/work/vert-fairy/source/SessionService.mc" 12 12 ]
+            symbol [ ActivityRecording %tmp.3 12 25 42 ];
+            %tmp.3 = getm $.Toybox.ActivityRecording;
+            %tmp.4 = null;
+            %tmp.5 = ne %tmp.3 %tmp.4;
+            symbol [ _supported ? 12 12 22 ];
+            putv self :_supported %tmp.5;
+_Users_oliverkoeth_work_vert_fairy_source_SessionService_mc_9_30_13_8_stop:
+        }
+        [ @file = "/Users/oliverkoeth/work/vert-fairy/source/SessionService.mc"; @line = 15; @symbol_functiondef = [getErrorMessage,15,17,32]; ]
+        function getErrorMessage() {
+_Users_oliverkoeth_work_vert_fairy_source_SessionService_mc_15_35_17_8_start:
+[ "/Users/oliverkoeth/work/vert-fairy/source/SessionService.mc" 16 12 ]
+            symbol [ _errorMessage %tmp.2 16 19 32 ];
+            %tmp.2 = getv ? :_errorMessage;
+            ret %tmp.2;
+_Users_oliverkoeth_work_vert_fairy_source_SessionService_mc_15_35_17_8_stop:
+        }
+        [ @file = "/Users/oliverkoeth/work/vert-fairy/source/SessionService.mc"; @line = 19; @symbol_functiondef = [isSupported,19,17,28]; ]
+        function isSupported() {
+_Users_oliverkoeth_work_vert_fairy_source_SessionService_mc_19_31_21_8_start:
+[ "/Users/oliverkoeth/work/vert-fairy/source/SessionService.mc" 20 12 ]
+            symbol [ _supported %tmp.2 20 19 29 ];
+            %tmp.2 = getv ? :_supported;
+            ret %tmp.2;
+_Users_oliverkoeth_work_vert_fairy_source_SessionService_mc_19_31_21_8_stop:
+        }
+        [ @file = "/Users/oliverkoeth/work/vert-fairy/source/SessionService.mc"; @line = 23; @symbol_functiondef = [startSession,23,17,29]; ]
+        function startSession() {
+_Users_oliverkoeth_work_vert_fairy_source_SessionService_mc_23_32_43_8_start:
+[ "/Users/oliverkoeth/work/vert-fairy/source/SessionService.mc" 24 12 ]
+            %tmp.1 = null;
+            symbol [ _errorMessage ? 24 12 25 ];
+            putv self :_errorMessage %tmp.1;
+[ "/Users/oliverkoeth/work/vert-fairy/source/SessionService.mc" 25 12 ]
+_Users_oliverkoeth_work_vert_fairy_source_SessionService_mc_25_12_28_12_if_stmt:
+            symbol [ _supported %tmp.3 25 17 27 ];
+            %tmp.3 = getv ? :_supported;
+            %tmp.4 = not %tmp.3;
+            bf %tmp.4 @_Users_oliverkoeth_work_vert_fairy_source_SessionService_mc_25_12_28_12_if_end;
+_Users_oliverkoeth_work_vert_fairy_source_SessionService_mc_25_12_28_12_if_true:
+_Users_oliverkoeth_work_vert_fairy_source_SessionService_mc_25_29_28_12_start:
+[ "/Users/oliverkoeth/work/vert-fairy/source/SessionService.mc" 26 16 ]
+            symbol [ Application %tmp.6 26 32 43 ];
+            %tmp.6 = getv ? :Application;
+            symbol [ loadResource %tmp.7 26 44 56 ];
+            %tmp.7 = getv function %tmp.6 :loadResource;
+            symbol [ Rez %tmp.9 26 57 60 ];
+            %tmp.9 = getv ? :Rez;
+            symbol [ Strings %tmp.10 26 61 68 ];
+            %tmp.10 = getv %tmp.9 :Strings;
+            symbol [ ErrorActivityRecording %tmp.11 26 69 91 ];
+            %tmp.11 = getv %tmp.10 :ErrorActivityRecording;
+            %tmp.12 = invoke %tmp.6 %tmp.7(%tmp.11);
+            symbol [ _errorMessage ? 26 16 29 ];
+            putv self :_errorMessage %tmp.12;
+[ "/Users/oliverkoeth/work/vert-fairy/source/SessionService.mc" 27 16 ]
+            %tmp.13 = false;
+            ret %tmp.13;
+_Users_oliverkoeth_work_vert_fairy_source_SessionService_mc_25_29_28_12_stop:
+            goto @_Users_oliverkoeth_work_vert_fairy_source_SessionService_mc_25_12_28_12_if_end;
+_Users_oliverkoeth_work_vert_fairy_source_SessionService_mc_25_12_28_12_if_end:
+[ "/Users/oliverkoeth/work/vert-fairy/source/SessionService.mc" 29 12 ]
+_Users_oliverkoeth_work_vert_fairy_source_SessionService_mc_29_12_31_12_if_stmt:
+            symbol [ _session %tmp.15 29 16 24 ];
+            %tmp.15 = getv ? :_session;
+            %tmp.16 = null;
+            %tmp.17 = ne %tmp.15 %tmp.16;
+            bf %tmp.17 @_Users_oliverkoeth_work_vert_fairy_source_SessionService_mc_29_12_31_12_if_end;
+_Users_oliverkoeth_work_vert_fairy_source_SessionService_mc_29_12_31_12_if_true:
+_Users_oliverkoeth_work_vert_fairy_source_SessionService_mc_29_34_31_12_start:
+[ "/Users/oliverkoeth/work/vert-fairy/source/SessionService.mc" 30 16 ]
+            %tmp.18 = true;
+            ret %tmp.18;
+_Users_oliverkoeth_work_vert_fairy_source_SessionService_mc_29_34_31_12_stop:
+            goto @_Users_oliverkoeth_work_vert_fairy_source_SessionService_mc_29_12_31_12_if_end;
+_Users_oliverkoeth_work_vert_fairy_source_SessionService_mc_29_12_31_12_if_end:
+[ "/Users/oliverkoeth/work/vert-fairy/source/SessionService.mc" 32 12 ]
+            [ "_Users_oliverkoeth_work_vert_fairy_source_SessionService_mc_23_32_43_8_start" "_Users_oliverkoeth_work_vert_fairy_source_SessionService_mc_23_32_43_8_stop" ]
+            %options.1 = local;
+            symbol [ options %options.1 32 16 23 ];
+            %tmp.19 = newd 2;
+            %tmp.21 = const :name;
+            symbol [ name %tmp.21 33 17 21 const ];
+            %tmp.22 = "Raw Step Activity";
+            %tmp.23 = dup %tmp.19;
+            %tmp.24 = aputv %tmp.23 %tmp.21 %tmp.22;
+            %tmp.26 = const :sport;
+            symbol [ sport %tmp.26 34 17 22 const ];
+            symbol [ ActivityRecording %tmp.27 34 26 43 ];
+            %tmp.27 = getm $.Toybox.ActivityRecording;
+            symbol [ SPORT_RUNNING %tmp.28 34 44 57 ];
+            %tmp.28 = getv %tmp.27 :SPORT_RUNNING;
+            %tmp.29 = dup %tmp.24;
+            %tmp.30 = aputv %tmp.29 %tmp.26 %tmp.28;
+            lputv %options.1 %tmp.30;
+            symbol [ options %options.1 32 16 23 ];
+[ "/Users/oliverkoeth/work/vert-fairy/source/SessionService.mc" 36 12 ]
+            symbol [ ActivityRecording %tmp.31 36 23 40 ];
+            %tmp.31 = getm $.Toybox.ActivityRecording;
+            symbol [ createSession %tmp.32 36 41 54 ];
+            %tmp.32 = getv function %tmp.31 :createSession;
+            %tmp.33 = lgetv %options.1;
+            symbol [ options %tmp.33 36 55 62 ];
+            %tmp.34 = invoke %tmp.31 %tmp.32(%tmp.33);
+            symbol [ _session ? 36 12 20 ];
+            putv self :_session %tmp.34;
+[ "/Users/oliverkoeth/work/vert-fairy/source/SessionService.mc" 37 12 ]
+_Users_oliverkoeth_work_vert_fairy_source_SessionService_mc_37_12_40_12_if_stmt:
+            symbol [ _session %tmp.36 37 16 24 ];
+            %tmp.36 = getv ? :_session;
+            %tmp.37 = null;
+            %tmp.38 = eq %tmp.36 %tmp.37;
+            bf %tmp.38 @_Users_oliverkoeth_work_vert_fairy_source_SessionService_mc_37_12_40_12_if_end;
+_Users_oliverkoeth_work_vert_fairy_source_SessionService_mc_37_12_40_12_if_true:
+_Users_oliverkoeth_work_vert_fairy_source_SessionService_mc_37_34_40_12_start:
+[ "/Users/oliverkoeth/work/vert-fairy/source/SessionService.mc" 38 16 ]
+            symbol [ Application %tmp.40 38 32 43 ];
+            %tmp.40 = getv ? :Application;
+            symbol [ loadResource %tmp.41 38 44 56 ];
+            %tmp.41 = getv function %tmp.40 :loadResource;
+            symbol [ Rez %tmp.43 38 57 60 ];
+            %tmp.43 = getv ? :Rez;
+            symbol [ Strings %tmp.44 38 61 68 ];
+            %tmp.44 = getv %tmp.43 :Strings;
+            symbol [ ErrorActivityRecording %tmp.45 38 69 91 ];
+            %tmp.45 = getv %tmp.44 :ErrorActivityRecording;
+            %tmp.46 = invoke %tmp.40 %tmp.41(%tmp.45);
+            symbol [ _errorMessage ? 38 16 29 ];
+            putv self :_errorMessage %tmp.46;
+[ "/Users/oliverkoeth/work/vert-fairy/source/SessionService.mc" 39 16 ]
+            %tmp.47 = false;
+            ret %tmp.47;
+_Users_oliverkoeth_work_vert_fairy_source_SessionService_mc_37_34_40_12_stop:
+            goto @_Users_oliverkoeth_work_vert_fairy_source_SessionService_mc_37_12_40_12_if_end;
+_Users_oliverkoeth_work_vert_fairy_source_SessionService_mc_37_12_40_12_if_end:
+[ "/Users/oliverkoeth/work/vert-fairy/source/SessionService.mc" 41 12 ]
+            symbol [ _session %tmp.49 41 12 20 ];
+            %tmp.49 = getv ? :_session;
+            symbol [ start %tmp.50 41 21 26 ];
+            %tmp.50 = getv function %tmp.49 :start;
+            invoke %tmp.49 %tmp.50();
+[ "/Users/oliverkoeth/work/vert-fairy/source/SessionService.mc" 42 12 ]
+            %tmp.51 = true;
+            ret %tmp.51;
+_Users_oliverkoeth_work_vert_fairy_source_SessionService_mc_23_32_43_8_stop:
+        }
+        [ @file = "/Users/oliverkoeth/work/vert-fairy/source/SessionService.mc"; @line = 45; @symbol_functiondef = [updateMetrics,45,17,30]; @symbol_param<0> = [steps,45,31,36]; @symbol_param<1> = [distance,45,38,46]; ]
+        function updateMetrics(steps, distance) {
+_Users_oliverkoeth_work_vert_fairy_source_SessionService_mc_45_48_49_8_start:
+[ "/Users/oliverkoeth/work/vert-fairy/source/SessionService.mc" 46 12 ]
+_Users_oliverkoeth_work_vert_fairy_source_SessionService_mc_46_12_48_12_if_stmt:
+            symbol [ _session %tmp.2 46 16 24 ];
+            %tmp.2 = getv ? :_session;
+            %tmp.3 = null;
+            %tmp.4 = eq %tmp.2 %tmp.3;
+            bf %tmp.4 @_Users_oliverkoeth_work_vert_fairy_source_SessionService_mc_46_12_48_12_if_end;
+_Users_oliverkoeth_work_vert_fairy_source_SessionService_mc_46_12_48_12_if_true:
+_Users_oliverkoeth_work_vert_fairy_source_SessionService_mc_46_34_48_12_start:
+[ "/Users/oliverkoeth/work/vert-fairy/source/SessionService.mc" 47 16 ]
+            ret ?;
+_Users_oliverkoeth_work_vert_fairy_source_SessionService_mc_46_34_48_12_stop:
+            goto @_Users_oliverkoeth_work_vert_fairy_source_SessionService_mc_46_12_48_12_if_end;
+_Users_oliverkoeth_work_vert_fairy_source_SessionService_mc_46_12_48_12_if_end:
+_Users_oliverkoeth_work_vert_fairy_source_SessionService_mc_45_48_49_8_stop:
+        }
+        [ @file = "/Users/oliverkoeth/work/vert-fairy/source/SessionService.mc"; @line = 51; @symbol_functiondef = [stopSession,51,17,28]; @symbol_param<0> = [save,51,29,33]; ]
+        function stopSession(save) {
+_Users_oliverkoeth_work_vert_fairy_source_SessionService_mc_51_35_59_8_start:
+[ "/Users/oliverkoeth/work/vert-fairy/source/SessionService.mc" 52 12 ]
+_Users_oliverkoeth_work_vert_fairy_source_SessionService_mc_52_12_54_12_if_stmt:
+            symbol [ _session %tmp.2 52 16 24 ];
+            %tmp.2 = getv ? :_session;
+            %tmp.3 = null;
+            %tmp.4 = eq %tmp.2 %tmp.3;
+            bf %tmp.4 @_Users_oliverkoeth_work_vert_fairy_source_SessionService_mc_52_12_54_12_if_end;
+_Users_oliverkoeth_work_vert_fairy_source_SessionService_mc_52_12_54_12_if_true:
+_Users_oliverkoeth_work_vert_fairy_source_SessionService_mc_52_34_54_12_start:
+[ "/Users/oliverkoeth/work/vert-fairy/source/SessionService.mc" 53 16 ]
+            ret ?;
+_Users_oliverkoeth_work_vert_fairy_source_SessionService_mc_52_34_54_12_stop:
+            goto @_Users_oliverkoeth_work_vert_fairy_source_SessionService_mc_52_12_54_12_if_end;
+_Users_oliverkoeth_work_vert_fairy_source_SessionService_mc_52_12_54_12_if_end:
+[ "/Users/oliverkoeth/work/vert-fairy/source/SessionService.mc" 55 12 ]
+            symbol [ _session %tmp.6 55 12 20 ];
+            %tmp.6 = getv ? :_session;
+            symbol [ stop %tmp.7 55 21 25 ];
+            %tmp.7 = getv function %tmp.6 :stop;
+            invoke %tmp.6 %tmp.7();
+[ "/Users/oliverkoeth/work/vert-fairy/source/SessionService.mc" 56 12 ]
+            symbol [ _session %tmp.9 56 12 20 ];
+            %tmp.9 = getv ? :_session;
+            symbol [ save %tmp.10 56 21 25 ];
+            %tmp.10 = getv function %tmp.9 :save;
+            invoke %tmp.9 %tmp.10();
+[ "/Users/oliverkoeth/work/vert-fairy/source/SessionService.mc" 57 12 ]
+            symbol [ _session %tmp.12 57 12 20 ];
+            %tmp.12 = getv ? :_session;
+            symbol [ discard %tmp.13 57 21 28 ];
+            %tmp.13 = getv function %tmp.12 :discard;
+            invoke %tmp.12 %tmp.13();
+[ "/Users/oliverkoeth/work/vert-fairy/source/SessionService.mc" 58 12 ]
+            %tmp.14 = null;
+            symbol [ _session ? 58 12 20 ];
+            putv self :_session %tmp.14;
+_Users_oliverkoeth_work_vert_fairy_source_SessionService_mc_51_35_59_8_stop:
+        }
+    }
+}
+[ @file = "/Users/oliverkoeth/work/vert-fairy/source/SessionService.mc"; @line = 1; ]
+<init> {
+}

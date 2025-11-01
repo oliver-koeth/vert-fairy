@@ -1,0 +1,1033 @@
+[ @file = "/Users/oliverkoeth/work/vert-fairy/source/StepDetector.mc"; @line = 1; @symbol_usingdef<0> = [Toybox,1,6,12]; @symbol_usingdef<1> = [Math,1,13,17]; @symbol_usingAlias = [Math,1,21,25]; ]
+using Toybox.Math as :Math;
+[ @file = "/Users/oliverkoeth/work/vert-fairy/source/StepDetector.mc"; @line = 2; @symbol_usingdef<0> = [Toybox,2,6,12]; @symbol_usingdef<1> = [Lang,2,13,17]; ]
+using Toybox.Lang;
+[ @file = "/Users/oliverkoeth/work/vert-fairy/source/StepDetector.mc"; @line = 4; @symbol_moduledef = [RawStep,4,7,14]; ]
+module RawStep {
+    [ @file = "/Users/oliverkoeth/work/vert-fairy/source/StepDetector.mc"; @line = 4; ]
+    <init> {
+    }
+    [ @file = "/Users/oliverkoeth/work/vert-fairy/source/StepDetector.mc"; @line = 9; @symbol_classdef = [StepDetector,9,10,22]; ]
+    class StepDetector {
+        [ @file = "/Users/oliverkoeth/work/vert-fairy/source/StepDetector.mc"; @line = 9; ]
+        <init> {
+        }
+        [ @file = "/Users/oliverkoeth/work/vert-fairy/source/StepDetector.mc"; @line = 9; ]
+        static
+        <init> {
+        }
+        [ @file = "/Users/oliverkoeth/work/vert-fairy/source/StepDetector.mc"; @line = 10; @position = 14; @symbol_constdef = [DEFAULT_GRAVITY_WINDOW,10,14,36]; ]
+        const DEFAULT_GRAVITY_WINDOW = 25;
+        [ @file = "/Users/oliverkoeth/work/vert-fairy/source/StepDetector.mc"; @line = 11; @position = 14; @symbol_constdef = [DEFAULT_MIN_THRESHOLD,11,14,35]; ]
+        const DEFAULT_MIN_THRESHOLD = 0.9;
+        [ @file = "/Users/oliverkoeth/work/vert-fairy/source/StepDetector.mc"; @line = 12; @position = 14; @symbol_constdef = [DEFAULT_SENSITIVITY,12,14,33]; ]
+        const DEFAULT_SENSITIVITY = 1.2;
+        [ @file = "/Users/oliverkoeth/work/vert-fairy/source/StepDetector.mc"; @line = 13; @position = 14; @symbol_constdef = [DEFAULT_ALPHA,13,14,27]; ]
+        const DEFAULT_ALPHA = 0.05;
+        [ @file = "/Users/oliverkoeth/work/vert-fairy/source/StepDetector.mc"; @line = 14; @position = 14; @symbol_constdef = [DEFAULT_BETA,14,14,26]; ]
+        const DEFAULT_BETA = 0.05;
+        [ @file = "/Users/oliverkoeth/work/vert-fairy/source/StepDetector.mc"; @line = 15; @position = 14; @symbol_constdef = [DEFAULT_REFRACTORY_MS,15,14,35]; ]
+        const DEFAULT_REFRACTORY_MS = 280;
+        [ @file = "/Users/oliverkoeth/work/vert-fairy/source/StepDetector.mc"; @line = 16; @position = 14; @symbol_constdef = [DEFAULT_SAMPLE_PERIOD_MS,16,14,38]; ]
+        const DEFAULT_SAMPLE_PERIOD_MS = 40;
+        [ @file = "/Users/oliverkoeth/work/vert-fairy/source/StepDetector.mc"; @line = 18; @position = 12; @symbol_vardef = [_gravityWindow,18,12,26]; ]
+        var _gravityWindow;
+        [ @file = "/Users/oliverkoeth/work/vert-fairy/source/StepDetector.mc"; @line = 19; @position = 12; @symbol_vardef = [_samplePeriodMs,19,12,27]; ]
+        var _samplePeriodMs;
+        [ @file = "/Users/oliverkoeth/work/vert-fairy/source/StepDetector.mc"; @line = 20; @position = 12; @symbol_vardef = [_minThreshold,20,12,25]; ]
+        var _minThreshold;
+        [ @file = "/Users/oliverkoeth/work/vert-fairy/source/StepDetector.mc"; @line = 21; @position = 12; @symbol_vardef = [_sensitivity,21,12,24]; ]
+        var _sensitivity;
+        [ @file = "/Users/oliverkoeth/work/vert-fairy/source/StepDetector.mc"; @line = 22; @position = 12; @symbol_vardef = [_alpha,22,12,18]; ]
+        var _alpha;
+        [ @file = "/Users/oliverkoeth/work/vert-fairy/source/StepDetector.mc"; @line = 23; @position = 12; @symbol_vardef = [_beta,23,12,17]; ]
+        var _beta;
+        [ @file = "/Users/oliverkoeth/work/vert-fairy/source/StepDetector.mc"; @line = 24; @position = 12; @symbol_vardef = [_refractoryMs,24,12,25]; ]
+        var _refractoryMs;
+        [ @file = "/Users/oliverkoeth/work/vert-fairy/source/StepDetector.mc"; @line = 26; @position = 12; @symbol_vardef = [_buffer,26,12,19]; ]
+        var _buffer;
+        [ @file = "/Users/oliverkoeth/work/vert-fairy/source/StepDetector.mc"; @line = 27; @position = 12; @symbol_vardef = [_sumX,27,12,17]; ]
+        var _sumX;
+        [ @file = "/Users/oliverkoeth/work/vert-fairy/source/StepDetector.mc"; @line = 28; @position = 12; @symbol_vardef = [_sumY,28,12,17]; ]
+        var _sumY;
+        [ @file = "/Users/oliverkoeth/work/vert-fairy/source/StepDetector.mc"; @line = 29; @position = 12; @symbol_vardef = [_sumZ,29,12,17]; ]
+        var _sumZ;
+        [ @file = "/Users/oliverkoeth/work/vert-fairy/source/StepDetector.mc"; @line = 30; @position = 12; @symbol_vardef = [_stepCount,30,12,22]; ]
+        var _stepCount;
+        [ @file = "/Users/oliverkoeth/work/vert-fairy/source/StepDetector.mc"; @line = 31; @position = 12; @symbol_vardef = [_avgMag,31,12,19]; ]
+        var _avgMag;
+        [ @file = "/Users/oliverkoeth/work/vert-fairy/source/StepDetector.mc"; @line = 32; @position = 12; @symbol_vardef = [_avgDeviation,32,12,25]; ]
+        var _avgDeviation;
+        [ @file = "/Users/oliverkoeth/work/vert-fairy/source/StepDetector.mc"; @line = 33; @position = 12; @symbol_vardef = [_lastAboveThreshold,33,12,31]; ]
+        var _lastAboveThreshold;
+        [ @file = "/Users/oliverkoeth/work/vert-fairy/source/StepDetector.mc"; @line = 34; @position = 12; @symbol_vardef = [_lastStepTimestamp,34,12,30]; ]
+        var _lastStepTimestamp;
+        [ @file = "/Users/oliverkoeth/work/vert-fairy/source/StepDetector.mc"; @line = 35; @position = 12; @symbol_vardef = [_lastSampleTimestamp,35,12,32]; ]
+        var _lastSampleTimestamp;
+        [ @file = "/Users/oliverkoeth/work/vert-fairy/source/StepDetector.mc"; @line = 37; @symbol_functiondef = [initialize,37,17,27]; @symbol_param<0> = [options,37,28,35]; ]
+        function initialize(options) as Void {
+_Users_oliverkoeth_work_vert_fairy_source_StepDetector_mc_37_37_49_8_start:
+[ "/Users/oliverkoeth/work/vert-fairy/source/StepDetector.mc" 38 12 ]
+_Users_oliverkoeth_work_vert_fairy_source_StepDetector_mc_38_12_40_12_if_stmt:
+            %tmp.1 = lgetv %options;
+            symbol [ options %tmp.1 38 16 23 ];
+            %tmp.2 = null;
+            %tmp.3 = eq %tmp.1 %tmp.2;
+            bf %tmp.3 @_Users_oliverkoeth_work_vert_fairy_source_StepDetector_mc_38_12_40_12_if_end;
+_Users_oliverkoeth_work_vert_fairy_source_StepDetector_mc_38_12_40_12_if_true:
+_Users_oliverkoeth_work_vert_fairy_source_StepDetector_mc_38_33_40_12_start:
+[ "/Users/oliverkoeth/work/vert-fairy/source/StepDetector.mc" 39 16 ]
+            %tmp.4 = newd 0;
+            lputv %options %tmp.4;
+            symbol [ options %options 39 16 23 ];
+_Users_oliverkoeth_work_vert_fairy_source_StepDetector_mc_38_33_40_12_stop:
+            goto @_Users_oliverkoeth_work_vert_fairy_source_StepDetector_mc_38_12_40_12_if_end;
+_Users_oliverkoeth_work_vert_fairy_source_StepDetector_mc_38_12_40_12_if_end:
+[ "/Users/oliverkoeth/work/vert-fairy/source/StepDetector.mc" 41 12 ]
+_Users_oliverkoeth_work_vert_fairy_source_StepDetector_mc_41_29_41_89_begin:
+            %tmp.5 = lgetv %options;
+            symbol [ options %tmp.5 41 29 36 ];
+            %tmp.7 = const :gravityWindow;
+            symbol [ gravityWindow %tmp.7 41 38 51 const ];
+            %tmp.8 = agetv %tmp.5 %tmp.7;
+            %tmp.9 = null;
+            %tmp.10 = ne %tmp.8 %tmp.9;
+            bf %tmp.10 @_Users_oliverkoeth_work_vert_fairy_source_StepDetector_mc_41_29_41_89_else_false;
+_Users_oliverkoeth_work_vert_fairy_source_StepDetector_mc_41_29_41_89_true:
+            %tmp.11 = lgetv %options;
+            symbol [ options %tmp.11 41 63 70 ];
+            %tmp.13 = const :gravityWindow;
+            symbol [ gravityWindow %tmp.13 41 72 85 const ];
+            %tmp.14 = agetv %tmp.11 %tmp.13;
+            push %tmp.14;
+            goto @_Users_oliverkoeth_work_vert_fairy_source_StepDetector_mc_41_29_41_89_end;
+_Users_oliverkoeth_work_vert_fairy_source_StepDetector_mc_41_29_41_89_else_false:
+            symbol [ DEFAULT_GRAVITY_WINDOW %tmp.16 41 89 111 ];
+            %tmp.16 = getv ? :DEFAULT_GRAVITY_WINDOW;
+            push %tmp.16;
+_Users_oliverkoeth_work_vert_fairy_source_StepDetector_mc_41_29_41_89_end:
+            %tmp.17 = phi [%tmp.10 @_Users_oliverkoeth_work_vert_fairy_source_StepDetector_mc_41_29_41_89_begin] [%tmp.14 @_Users_oliverkoeth_work_vert_fairy_source_StepDetector_mc_41_29_41_89_true] [%tmp.16 @_Users_oliverkoeth_work_vert_fairy_source_StepDetector_mc_41_29_41_89_else_false] [%tmp.17 @_Users_oliverkoeth_work_vert_fairy_source_StepDetector_mc_41_29_41_89_end];
+            symbol [ _gravityWindow ? 41 12 26 ];
+            putv self :_gravityWindow %tmp.17;
+[ "/Users/oliverkoeth/work/vert-fairy/source/StepDetector.mc" 42 12 ]
+_Users_oliverkoeth_work_vert_fairy_source_StepDetector_mc_42_30_42_92_begin:
+            %tmp.18 = lgetv %options;
+            symbol [ options %tmp.18 42 30 37 ];
+            %tmp.20 = const :samplePeriodMs;
+            symbol [ samplePeriodMs %tmp.20 42 39 53 const ];
+            %tmp.21 = agetv %tmp.18 %tmp.20;
+            %tmp.22 = null;
+            %tmp.23 = ne %tmp.21 %tmp.22;
+            bf %tmp.23 @_Users_oliverkoeth_work_vert_fairy_source_StepDetector_mc_42_30_42_92_else_false;
+_Users_oliverkoeth_work_vert_fairy_source_StepDetector_mc_42_30_42_92_true:
+            %tmp.24 = lgetv %options;
+            symbol [ options %tmp.24 42 65 72 ];
+            %tmp.26 = const :samplePeriodMs;
+            symbol [ samplePeriodMs %tmp.26 42 74 88 const ];
+            %tmp.27 = agetv %tmp.24 %tmp.26;
+            push %tmp.27;
+            goto @_Users_oliverkoeth_work_vert_fairy_source_StepDetector_mc_42_30_42_92_end;
+_Users_oliverkoeth_work_vert_fairy_source_StepDetector_mc_42_30_42_92_else_false:
+            symbol [ DEFAULT_SAMPLE_PERIOD_MS %tmp.29 42 92 116 ];
+            %tmp.29 = getv ? :DEFAULT_SAMPLE_PERIOD_MS;
+            push %tmp.29;
+_Users_oliverkoeth_work_vert_fairy_source_StepDetector_mc_42_30_42_92_end:
+            %tmp.30 = phi [%tmp.23 @_Users_oliverkoeth_work_vert_fairy_source_StepDetector_mc_42_30_42_92_begin] [%tmp.27 @_Users_oliverkoeth_work_vert_fairy_source_StepDetector_mc_42_30_42_92_true] [%tmp.29 @_Users_oliverkoeth_work_vert_fairy_source_StepDetector_mc_42_30_42_92_else_false] [%tmp.30 @_Users_oliverkoeth_work_vert_fairy_source_StepDetector_mc_42_30_42_92_end];
+            symbol [ _samplePeriodMs ? 42 12 27 ];
+            putv self :_samplePeriodMs %tmp.30;
+[ "/Users/oliverkoeth/work/vert-fairy/source/StepDetector.mc" 43 12 ]
+_Users_oliverkoeth_work_vert_fairy_source_StepDetector_mc_43_28_43_86_begin:
+            %tmp.31 = lgetv %options;
+            symbol [ options %tmp.31 43 28 35 ];
+            %tmp.33 = const :minThreshold;
+            symbol [ minThreshold %tmp.33 43 37 49 const ];
+            %tmp.34 = agetv %tmp.31 %tmp.33;
+            %tmp.35 = null;
+            %tmp.36 = ne %tmp.34 %tmp.35;
+            bf %tmp.36 @_Users_oliverkoeth_work_vert_fairy_source_StepDetector_mc_43_28_43_86_else_false;
+_Users_oliverkoeth_work_vert_fairy_source_StepDetector_mc_43_28_43_86_true:
+            %tmp.37 = lgetv %options;
+            symbol [ options %tmp.37 43 61 68 ];
+            %tmp.39 = const :minThreshold;
+            symbol [ minThreshold %tmp.39 43 70 82 const ];
+            %tmp.40 = agetv %tmp.37 %tmp.39;
+            push %tmp.40;
+            goto @_Users_oliverkoeth_work_vert_fairy_source_StepDetector_mc_43_28_43_86_end;
+_Users_oliverkoeth_work_vert_fairy_source_StepDetector_mc_43_28_43_86_else_false:
+            symbol [ DEFAULT_MIN_THRESHOLD %tmp.42 43 86 107 ];
+            %tmp.42 = getv ? :DEFAULT_MIN_THRESHOLD;
+            push %tmp.42;
+_Users_oliverkoeth_work_vert_fairy_source_StepDetector_mc_43_28_43_86_end:
+            %tmp.43 = phi [%tmp.36 @_Users_oliverkoeth_work_vert_fairy_source_StepDetector_mc_43_28_43_86_begin] [%tmp.40 @_Users_oliverkoeth_work_vert_fairy_source_StepDetector_mc_43_28_43_86_true] [%tmp.42 @_Users_oliverkoeth_work_vert_fairy_source_StepDetector_mc_43_28_43_86_else_false] [%tmp.43 @_Users_oliverkoeth_work_vert_fairy_source_StepDetector_mc_43_28_43_86_end];
+            symbol [ _minThreshold ? 43 12 25 ];
+            putv self :_minThreshold %tmp.43;
+[ "/Users/oliverkoeth/work/vert-fairy/source/StepDetector.mc" 44 12 ]
+_Users_oliverkoeth_work_vert_fairy_source_StepDetector_mc_44_27_44_83_begin:
+            %tmp.44 = lgetv %options;
+            symbol [ options %tmp.44 44 27 34 ];
+            %tmp.46 = const :sensitivity;
+            symbol [ sensitivity %tmp.46 44 36 47 const ];
+            %tmp.47 = agetv %tmp.44 %tmp.46;
+            %tmp.48 = null;
+            %tmp.49 = ne %tmp.47 %tmp.48;
+            bf %tmp.49 @_Users_oliverkoeth_work_vert_fairy_source_StepDetector_mc_44_27_44_83_else_false;
+_Users_oliverkoeth_work_vert_fairy_source_StepDetector_mc_44_27_44_83_true:
+            %tmp.50 = lgetv %options;
+            symbol [ options %tmp.50 44 59 66 ];
+            %tmp.52 = const :sensitivity;
+            symbol [ sensitivity %tmp.52 44 68 79 const ];
+            %tmp.53 = agetv %tmp.50 %tmp.52;
+            push %tmp.53;
+            goto @_Users_oliverkoeth_work_vert_fairy_source_StepDetector_mc_44_27_44_83_end;
+_Users_oliverkoeth_work_vert_fairy_source_StepDetector_mc_44_27_44_83_else_false:
+            symbol [ DEFAULT_SENSITIVITY %tmp.55 44 83 102 ];
+            %tmp.55 = getv ? :DEFAULT_SENSITIVITY;
+            push %tmp.55;
+_Users_oliverkoeth_work_vert_fairy_source_StepDetector_mc_44_27_44_83_end:
+            %tmp.56 = phi [%tmp.49 @_Users_oliverkoeth_work_vert_fairy_source_StepDetector_mc_44_27_44_83_begin] [%tmp.53 @_Users_oliverkoeth_work_vert_fairy_source_StepDetector_mc_44_27_44_83_true] [%tmp.55 @_Users_oliverkoeth_work_vert_fairy_source_StepDetector_mc_44_27_44_83_else_false] [%tmp.56 @_Users_oliverkoeth_work_vert_fairy_source_StepDetector_mc_44_27_44_83_end];
+            symbol [ _sensitivity ? 44 12 24 ];
+            putv self :_sensitivity %tmp.56;
+[ "/Users/oliverkoeth/work/vert-fairy/source/StepDetector.mc" 45 12 ]
+_Users_oliverkoeth_work_vert_fairy_source_StepDetector_mc_45_21_45_65_begin:
+            %tmp.57 = lgetv %options;
+            symbol [ options %tmp.57 45 21 28 ];
+            %tmp.59 = const :alpha;
+            symbol [ alpha %tmp.59 45 30 35 const ];
+            %tmp.60 = agetv %tmp.57 %tmp.59;
+            %tmp.61 = null;
+            %tmp.62 = ne %tmp.60 %tmp.61;
+            bf %tmp.62 @_Users_oliverkoeth_work_vert_fairy_source_StepDetector_mc_45_21_45_65_else_false;
+_Users_oliverkoeth_work_vert_fairy_source_StepDetector_mc_45_21_45_65_true:
+            %tmp.63 = lgetv %options;
+            symbol [ options %tmp.63 45 47 54 ];
+            %tmp.65 = const :alpha;
+            symbol [ alpha %tmp.65 45 56 61 const ];
+            %tmp.66 = agetv %tmp.63 %tmp.65;
+            push %tmp.66;
+            goto @_Users_oliverkoeth_work_vert_fairy_source_StepDetector_mc_45_21_45_65_end;
+_Users_oliverkoeth_work_vert_fairy_source_StepDetector_mc_45_21_45_65_else_false:
+            symbol [ DEFAULT_ALPHA %tmp.68 45 65 78 ];
+            %tmp.68 = getv ? :DEFAULT_ALPHA;
+            push %tmp.68;
+_Users_oliverkoeth_work_vert_fairy_source_StepDetector_mc_45_21_45_65_end:
+            %tmp.69 = phi [%tmp.62 @_Users_oliverkoeth_work_vert_fairy_source_StepDetector_mc_45_21_45_65_begin] [%tmp.66 @_Users_oliverkoeth_work_vert_fairy_source_StepDetector_mc_45_21_45_65_true] [%tmp.68 @_Users_oliverkoeth_work_vert_fairy_source_StepDetector_mc_45_21_45_65_else_false] [%tmp.69 @_Users_oliverkoeth_work_vert_fairy_source_StepDetector_mc_45_21_45_65_end];
+            symbol [ _alpha ? 45 12 18 ];
+            putv self :_alpha %tmp.69;
+[ "/Users/oliverkoeth/work/vert-fairy/source/StepDetector.mc" 46 12 ]
+_Users_oliverkoeth_work_vert_fairy_source_StepDetector_mc_46_20_46_62_begin:
+            %tmp.70 = lgetv %options;
+            symbol [ options %tmp.70 46 20 27 ];
+            %tmp.72 = const :beta;
+            symbol [ beta %tmp.72 46 29 33 const ];
+            %tmp.73 = agetv %tmp.70 %tmp.72;
+            %tmp.74 = null;
+            %tmp.75 = ne %tmp.73 %tmp.74;
+            bf %tmp.75 @_Users_oliverkoeth_work_vert_fairy_source_StepDetector_mc_46_20_46_62_else_false;
+_Users_oliverkoeth_work_vert_fairy_source_StepDetector_mc_46_20_46_62_true:
+            %tmp.76 = lgetv %options;
+            symbol [ options %tmp.76 46 45 52 ];
+            %tmp.78 = const :beta;
+            symbol [ beta %tmp.78 46 54 58 const ];
+            %tmp.79 = agetv %tmp.76 %tmp.78;
+            push %tmp.79;
+            goto @_Users_oliverkoeth_work_vert_fairy_source_StepDetector_mc_46_20_46_62_end;
+_Users_oliverkoeth_work_vert_fairy_source_StepDetector_mc_46_20_46_62_else_false:
+            symbol [ DEFAULT_BETA %tmp.81 46 62 74 ];
+            %tmp.81 = getv ? :DEFAULT_BETA;
+            push %tmp.81;
+_Users_oliverkoeth_work_vert_fairy_source_StepDetector_mc_46_20_46_62_end:
+            %tmp.82 = phi [%tmp.75 @_Users_oliverkoeth_work_vert_fairy_source_StepDetector_mc_46_20_46_62_begin] [%tmp.79 @_Users_oliverkoeth_work_vert_fairy_source_StepDetector_mc_46_20_46_62_true] [%tmp.81 @_Users_oliverkoeth_work_vert_fairy_source_StepDetector_mc_46_20_46_62_else_false] [%tmp.82 @_Users_oliverkoeth_work_vert_fairy_source_StepDetector_mc_46_20_46_62_end];
+            symbol [ _beta ? 46 12 17 ];
+            putv self :_beta %tmp.82;
+[ "/Users/oliverkoeth/work/vert-fairy/source/StepDetector.mc" 47 12 ]
+_Users_oliverkoeth_work_vert_fairy_source_StepDetector_mc_47_28_47_86_begin:
+            %tmp.83 = lgetv %options;
+            symbol [ options %tmp.83 47 28 35 ];
+            %tmp.85 = const :refractoryMs;
+            symbol [ refractoryMs %tmp.85 47 37 49 const ];
+            %tmp.86 = agetv %tmp.83 %tmp.85;
+            %tmp.87 = null;
+            %tmp.88 = ne %tmp.86 %tmp.87;
+            bf %tmp.88 @_Users_oliverkoeth_work_vert_fairy_source_StepDetector_mc_47_28_47_86_else_false;
+_Users_oliverkoeth_work_vert_fairy_source_StepDetector_mc_47_28_47_86_true:
+            %tmp.89 = lgetv %options;
+            symbol [ options %tmp.89 47 61 68 ];
+            %tmp.91 = const :refractoryMs;
+            symbol [ refractoryMs %tmp.91 47 70 82 const ];
+            %tmp.92 = agetv %tmp.89 %tmp.91;
+            push %tmp.92;
+            goto @_Users_oliverkoeth_work_vert_fairy_source_StepDetector_mc_47_28_47_86_end;
+_Users_oliverkoeth_work_vert_fairy_source_StepDetector_mc_47_28_47_86_else_false:
+            symbol [ DEFAULT_REFRACTORY_MS %tmp.94 47 86 107 ];
+            %tmp.94 = getv ? :DEFAULT_REFRACTORY_MS;
+            push %tmp.94;
+_Users_oliverkoeth_work_vert_fairy_source_StepDetector_mc_47_28_47_86_end:
+            %tmp.95 = phi [%tmp.88 @_Users_oliverkoeth_work_vert_fairy_source_StepDetector_mc_47_28_47_86_begin] [%tmp.92 @_Users_oliverkoeth_work_vert_fairy_source_StepDetector_mc_47_28_47_86_true] [%tmp.94 @_Users_oliverkoeth_work_vert_fairy_source_StepDetector_mc_47_28_47_86_else_false] [%tmp.95 @_Users_oliverkoeth_work_vert_fairy_source_StepDetector_mc_47_28_47_86_end];
+            symbol [ _refractoryMs ? 47 12 25 ];
+            putv self :_refractoryMs %tmp.95;
+[ "/Users/oliverkoeth/work/vert-fairy/source/StepDetector.mc" 48 12 ]
+            %tmp.96 = self;
+            symbol [ reset %tmp.97 48 12 17 ];
+            %tmp.97 = getv function %tmp.96 :reset;
+            invoke %tmp.96 %tmp.97();
+_Users_oliverkoeth_work_vert_fairy_source_StepDetector_mc_37_37_49_8_stop:
+        }
+        [ @file = "/Users/oliverkoeth/work/vert-fairy/source/StepDetector.mc"; @line = 51; @symbol_functiondef = [reset,51,17,22]; ]
+        function reset() {
+_Users_oliverkoeth_work_vert_fairy_source_StepDetector_mc_51_25_62_8_start:
+[ "/Users/oliverkoeth/work/vert-fairy/source/StepDetector.mc" 52 12 ]
+            %tmp.1 = newa 0;
+            symbol [ _buffer ? 52 12 19 ];
+            putv self :_buffer %tmp.1;
+[ "/Users/oliverkoeth/work/vert-fairy/source/StepDetector.mc" 53 12 ]
+            %tmp.2 = 0;
+            symbol [ _sumX ? 53 12 17 ];
+            putv self :_sumX %tmp.2;
+[ "/Users/oliverkoeth/work/vert-fairy/source/StepDetector.mc" 54 12 ]
+            %tmp.3 = 0;
+            symbol [ _sumY ? 54 12 17 ];
+            putv self :_sumY %tmp.3;
+[ "/Users/oliverkoeth/work/vert-fairy/source/StepDetector.mc" 55 12 ]
+            %tmp.4 = 0;
+            symbol [ _sumZ ? 55 12 17 ];
+            putv self :_sumZ %tmp.4;
+[ "/Users/oliverkoeth/work/vert-fairy/source/StepDetector.mc" 56 12 ]
+            %tmp.5 = 0;
+            symbol [ _stepCount ? 56 12 22 ];
+            putv self :_stepCount %tmp.5;
+[ "/Users/oliverkoeth/work/vert-fairy/source/StepDetector.mc" 57 12 ]
+            %tmp.6 = null;
+            symbol [ _avgMag ? 57 12 19 ];
+            putv self :_avgMag %tmp.6;
+[ "/Users/oliverkoeth/work/vert-fairy/source/StepDetector.mc" 58 12 ]
+            %tmp.7 = null;
+            symbol [ _avgDeviation ? 58 12 25 ];
+            putv self :_avgDeviation %tmp.7;
+[ "/Users/oliverkoeth/work/vert-fairy/source/StepDetector.mc" 59 12 ]
+            %tmp.8 = false;
+            symbol [ _lastAboveThreshold ? 59 12 31 ];
+            putv self :_lastAboveThreshold %tmp.8;
+[ "/Users/oliverkoeth/work/vert-fairy/source/StepDetector.mc" 60 12 ]
+            %tmp.9 = -1000000;
+            symbol [ _lastStepTimestamp ? 60 12 30 ];
+            putv self :_lastStepTimestamp %tmp.9;
+[ "/Users/oliverkoeth/work/vert-fairy/source/StepDetector.mc" 61 12 ]
+            %tmp.10 = null;
+            symbol [ _lastSampleTimestamp ? 61 12 32 ];
+            putv self :_lastSampleTimestamp %tmp.10;
+_Users_oliverkoeth_work_vert_fairy_source_StepDetector_mc_51_25_62_8_stop:
+        }
+        [ @file = "/Users/oliverkoeth/work/vert-fairy/source/StepDetector.mc"; @line = 64; @symbol_functiondef = [getStepCount,64,17,29]; ]
+        function getStepCount() {
+_Users_oliverkoeth_work_vert_fairy_source_StepDetector_mc_64_32_66_8_start:
+[ "/Users/oliverkoeth/work/vert-fairy/source/StepDetector.mc" 65 12 ]
+            symbol [ _stepCount %tmp.2 65 19 29 ];
+            %tmp.2 = getv ? :_stepCount;
+            ret %tmp.2;
+_Users_oliverkoeth_work_vert_fairy_source_StepDetector_mc_64_32_66_8_stop:
+        }
+        [ @file = "/Users/oliverkoeth/work/vert-fairy/source/StepDetector.mc"; @line = 68; @symbol_functiondef = [abs,68,17,20]; @symbol_param<0> = [x,68,21,22]; ]
+        function abs(x) {
+_Users_oliverkoeth_work_vert_fairy_source_StepDetector_mc_68_24_70_8_start:
+[ "/Users/oliverkoeth/work/vert-fairy/source/StepDetector.mc" 69 12 ]
+_Users_oliverkoeth_work_vert_fairy_source_StepDetector_mc_69_19_69_34_begin:
+            %tmp.1 = lgetv %x;
+            symbol [ x %tmp.1 69 20 21 ];
+            %tmp.2 = 0;
+            %tmp.3 = lt %tmp.1 %tmp.2;
+            bf %tmp.3 @_Users_oliverkoeth_work_vert_fairy_source_StepDetector_mc_69_19_69_34_else_false;
+_Users_oliverkoeth_work_vert_fairy_source_StepDetector_mc_69_19_69_34_true:
+            %tmp.4 = lgetv %x;
+            symbol [ x %tmp.4 69 30 31 ];
+            %tmp.5 = sub 0 %tmp.4;
+            push %tmp.5;
+            goto @_Users_oliverkoeth_work_vert_fairy_source_StepDetector_mc_69_19_69_34_end;
+_Users_oliverkoeth_work_vert_fairy_source_StepDetector_mc_69_19_69_34_else_false:
+            %tmp.6 = lgetv %x;
+            symbol [ x %tmp.6 69 34 35 ];
+            push %tmp.6;
+_Users_oliverkoeth_work_vert_fairy_source_StepDetector_mc_69_19_69_34_end:
+            %tmp.7 = phi [%tmp.3 @_Users_oliverkoeth_work_vert_fairy_source_StepDetector_mc_69_19_69_34_begin] [%tmp.5 @_Users_oliverkoeth_work_vert_fairy_source_StepDetector_mc_69_19_69_34_true] [%tmp.6 @_Users_oliverkoeth_work_vert_fairy_source_StepDetector_mc_69_19_69_34_else_false] [%tmp.7 @_Users_oliverkoeth_work_vert_fairy_source_StepDetector_mc_69_19_69_34_end];
+            ret %tmp.7;
+_Users_oliverkoeth_work_vert_fairy_source_StepDetector_mc_68_24_70_8_stop:
+        }
+        [ @file = "/Users/oliverkoeth/work/vert-fairy/source/StepDetector.mc"; @line = 72; @symbol_functiondef = [max,72,17,20]; @symbol_param<0> = [a,72,21,22]; @symbol_param<1> = [b,72,24,25]; ]
+        function max(a, b) {
+_Users_oliverkoeth_work_vert_fairy_source_StepDetector_mc_72_27_74_8_start:
+[ "/Users/oliverkoeth/work/vert-fairy/source/StepDetector.mc" 73 12 ]
+_Users_oliverkoeth_work_vert_fairy_source_StepDetector_mc_73_19_73_33_begin:
+            %tmp.1 = lgetv %a;
+            symbol [ a %tmp.1 73 20 21 ];
+            %tmp.2 = lgetv %b;
+            symbol [ b %tmp.2 73 24 25 ];
+            %tmp.3 = gt %tmp.1 %tmp.2;
+            bf %tmp.3 @_Users_oliverkoeth_work_vert_fairy_source_StepDetector_mc_73_19_73_33_else_false;
+_Users_oliverkoeth_work_vert_fairy_source_StepDetector_mc_73_19_73_33_true:
+            %tmp.4 = lgetv %a;
+            symbol [ a %tmp.4 73 29 30 ];
+            push %tmp.4;
+            goto @_Users_oliverkoeth_work_vert_fairy_source_StepDetector_mc_73_19_73_33_end;
+_Users_oliverkoeth_work_vert_fairy_source_StepDetector_mc_73_19_73_33_else_false:
+            %tmp.5 = lgetv %b;
+            symbol [ b %tmp.5 73 33 34 ];
+            push %tmp.5;
+_Users_oliverkoeth_work_vert_fairy_source_StepDetector_mc_73_19_73_33_end:
+            %tmp.6 = phi [%tmp.3 @_Users_oliverkoeth_work_vert_fairy_source_StepDetector_mc_73_19_73_33_begin] [%tmp.4 @_Users_oliverkoeth_work_vert_fairy_source_StepDetector_mc_73_19_73_33_true] [%tmp.5 @_Users_oliverkoeth_work_vert_fairy_source_StepDetector_mc_73_19_73_33_else_false] [%tmp.6 @_Users_oliverkoeth_work_vert_fairy_source_StepDetector_mc_73_19_73_33_end];
+            ret %tmp.6;
+_Users_oliverkoeth_work_vert_fairy_source_StepDetector_mc_72_27_74_8_stop:
+        }
+        [ @file = "/Users/oliverkoeth/work/vert-fairy/source/StepDetector.mc"; @line = 79; @symbol_functiondef = [addSamples,79,17,27]; @symbol_param<0> = [samples,79,28,35]; ]
+        function addSamples(samples) {
+_Users_oliverkoeth_work_vert_fairy_source_StepDetector_mc_79_37_159_8_start:
+[ "/Users/oliverkoeth/work/vert-fairy/source/StepDetector.mc" 80 12 ]
+_Users_oliverkoeth_work_vert_fairy_source_StepDetector_mc_80_12_82_12_if_stmt:
+            %tmp.1 = lgetv %samples;
+            symbol [ samples %tmp.1 80 16 23 ];
+            %tmp.2 = null;
+            %tmp.3 = eq %tmp.1 %tmp.2;
+            bf %tmp.3 @_Users_oliverkoeth_work_vert_fairy_source_StepDetector_mc_80_12_82_12_if_end;
+_Users_oliverkoeth_work_vert_fairy_source_StepDetector_mc_80_12_82_12_if_true:
+_Users_oliverkoeth_work_vert_fairy_source_StepDetector_mc_80_33_82_12_start:
+[ "/Users/oliverkoeth/work/vert-fairy/source/StepDetector.mc" 81 16 ]
+            %tmp.4 = 0;
+            ret %tmp.4;
+_Users_oliverkoeth_work_vert_fairy_source_StepDetector_mc_80_33_82_12_stop:
+            goto @_Users_oliverkoeth_work_vert_fairy_source_StepDetector_mc_80_12_82_12_if_end;
+_Users_oliverkoeth_work_vert_fairy_source_StepDetector_mc_80_12_82_12_if_end:
+[ "/Users/oliverkoeth/work/vert-fairy/source/StepDetector.mc" 83 12 ]
+            [ "_Users_oliverkoeth_work_vert_fairy_source_StepDetector_mc_79_37_159_8_start" "_Users_oliverkoeth_work_vert_fairy_source_StepDetector_mc_79_37_159_8_stop" ]
+            %newSteps.1 = local;
+            symbol [ newSteps %newSteps.1 83 16 24 ];
+            %tmp.5 = 0;
+            lputv %newSteps.1 %tmp.5;
+            symbol [ newSteps %newSteps.1 83 16 24 ];
+[ "/Users/oliverkoeth/work/vert-fairy/source/StepDetector.mc" 84 12 ]
+            [ "_Users_oliverkoeth_work_vert_fairy_source_StepDetector_mc_79_37_159_8_start" "_Users_oliverkoeth_work_vert_fairy_source_StepDetector_mc_79_37_159_8_stop" ]
+            %sampleCount.2 = local;
+            symbol [ sampleCount %sampleCount.2 84 16 27 ];
+            %tmp.6 = lgetv %samples;
+            symbol [ samples %tmp.6 84 30 37 ];
+            symbol [ size %tmp.7 84 38 42 ];
+            %tmp.7 = getv function %tmp.6 :size;
+            %tmp.8 = invoke %tmp.6 %tmp.7();
+            lputv %sampleCount.2 %tmp.8;
+            symbol [ sampleCount %sampleCount.2 84 16 27 ];
+[ "/Users/oliverkoeth/work/vert-fairy/source/StepDetector.mc" 85 12 ]
+            for @_Users_oliverkoeth_work_vert_fairy_source_StepDetector_mc_85_12_157_12_for_test @_Users_oliverkoeth_work_vert_fairy_source_StepDetector_mc_85_12_157_12_for_incr @_Users_oliverkoeth_work_vert_fairy_source_StepDetector_mc_85_12_157_12_for_end;
+_Users_oliverkoeth_work_vert_fairy_source_StepDetector_mc_85_12_157_12_for_init:
+            [ "_Users_oliverkoeth_work_vert_fairy_source_StepDetector_mc_85_12_157_12_for_begin" "_Users_oliverkoeth_work_vert_fairy_source_StepDetector_mc_85_12_157_12_for_end" ]
+            %i.3 = local;
+            symbol [ i %i.3 85 21 22 ];
+            %tmp.9 = 0;
+            lputv %i.3 %tmp.9;
+            symbol [ i %i.3 85 21 22 ];
+_Users_oliverkoeth_work_vert_fairy_source_StepDetector_mc_85_12_157_12_for_test:
+            %tmp.10 = lgetv %i.3;
+            symbol [ i %tmp.10 85 28 29 ];
+            %tmp.11 = lgetv %sampleCount.2;
+            symbol [ sampleCount %tmp.11 85 32 43 ];
+            %tmp.12 = lt %tmp.10 %tmp.11;
+            bf %tmp.12 @_Users_oliverkoeth_work_vert_fairy_source_StepDetector_mc_85_12_157_12_for_end;
+_Users_oliverkoeth_work_vert_fairy_source_StepDetector_mc_85_12_157_12_for_begin:
+_Users_oliverkoeth_work_vert_fairy_source_StepDetector_mc_85_53_157_12_start:
+[ "/Users/oliverkoeth/work/vert-fairy/source/StepDetector.mc" 86 16 ]
+            [ "_Users_oliverkoeth_work_vert_fairy_source_StepDetector_mc_85_53_157_12_start" "_Users_oliverkoeth_work_vert_fairy_source_StepDetector_mc_85_53_157_12_stop" ]
+            %sample.4 = local;
+            symbol [ sample %sample.4 86 20 26 ];
+            %tmp.13 = lgetv %samples;
+            symbol [ samples %tmp.13 86 29 36 ];
+            %tmp.14 = lgetv %i.3;
+            symbol [ i %tmp.14 86 37 38 ];
+            %tmp.15 = agetv %tmp.13 %tmp.14;
+            lputv %sample.4 %tmp.15;
+            symbol [ sample %sample.4 86 20 26 ];
+[ "/Users/oliverkoeth/work/vert-fairy/source/StepDetector.mc" 87 16 ]
+_Users_oliverkoeth_work_vert_fairy_source_StepDetector_mc_87_16_89_16_if_stmt:
+            %tmp.16 = lgetv %sample.4;
+            symbol [ sample %tmp.16 87 20 26 ];
+            %tmp.17 = null;
+            %tmp.18 = eq %tmp.16 %tmp.17;
+            bf %tmp.18 @_Users_oliverkoeth_work_vert_fairy_source_StepDetector_mc_87_16_89_16_if_end;
+_Users_oliverkoeth_work_vert_fairy_source_StepDetector_mc_87_16_89_16_if_true:
+_Users_oliverkoeth_work_vert_fairy_source_StepDetector_mc_87_36_89_16_start:
+[ "/Users/oliverkoeth/work/vert-fairy/source/StepDetector.mc" 88 20 ]
+            goto break @_Users_oliverkoeth_work_vert_fairy_source_StepDetector_mc_85_12_157_12_for_incr;
+_Users_oliverkoeth_work_vert_fairy_source_StepDetector_mc_87_36_89_16_stop:
+            goto @_Users_oliverkoeth_work_vert_fairy_source_StepDetector_mc_87_16_89_16_if_end;
+_Users_oliverkoeth_work_vert_fairy_source_StepDetector_mc_87_16_89_16_if_end:
+[ "/Users/oliverkoeth/work/vert-fairy/source/StepDetector.mc" 90 16 ]
+            [ "_Users_oliverkoeth_work_vert_fairy_source_StepDetector_mc_85_53_157_12_start" "_Users_oliverkoeth_work_vert_fairy_source_StepDetector_mc_85_53_157_12_stop" ]
+            %timestamp.5 = local;
+            symbol [ timestamp %timestamp.5 90 20 29 ];
+            %tmp.19 = lgetv %sample.4;
+            symbol [ sample %tmp.19 90 32 38 ];
+            %tmp.21 = const :timestamp;
+            symbol [ timestamp %tmp.21 90 40 49 const ];
+            %tmp.22 = agetv %tmp.19 %tmp.21;
+            lputv %timestamp.5 %tmp.22;
+            symbol [ timestamp %timestamp.5 90 20 29 ];
+[ "/Users/oliverkoeth/work/vert-fairy/source/StepDetector.mc" 91 16 ]
+_Users_oliverkoeth_work_vert_fairy_source_StepDetector_mc_91_16_97_16_if_stmt:
+            %tmp.23 = lgetv %timestamp.5;
+            symbol [ timestamp %tmp.23 91 20 29 ];
+            %tmp.24 = null;
+            %tmp.25 = eq %tmp.23 %tmp.24;
+            bf %tmp.25 @_Users_oliverkoeth_work_vert_fairy_source_StepDetector_mc_91_16_97_16_if_end;
+_Users_oliverkoeth_work_vert_fairy_source_StepDetector_mc_91_16_97_16_if_true:
+_Users_oliverkoeth_work_vert_fairy_source_StepDetector_mc_91_39_97_16_start:
+[ "/Users/oliverkoeth/work/vert-fairy/source/StepDetector.mc" 92 20 ]
+_Users_oliverkoeth_work_vert_fairy_source_StepDetector_mc_92_20_96_20_if_stmt:
+            symbol [ _lastSampleTimestamp %tmp.27 92 24 44 ];
+            %tmp.27 = getv ? :_lastSampleTimestamp;
+            %tmp.28 = null;
+            %tmp.29 = eq %tmp.27 %tmp.28;
+            bf %tmp.29 @_Users_oliverkoeth_work_vert_fairy_source_StepDetector_mc_92_20_96_20_if_else_false;
+_Users_oliverkoeth_work_vert_fairy_source_StepDetector_mc_92_20_96_20_if_true:
+_Users_oliverkoeth_work_vert_fairy_source_StepDetector_mc_92_54_94_20_start:
+[ "/Users/oliverkoeth/work/vert-fairy/source/StepDetector.mc" 93 24 ]
+            %tmp.30 = 0;
+            lputv %timestamp.5 %tmp.30;
+            symbol [ timestamp %timestamp.5 93 24 33 ];
+_Users_oliverkoeth_work_vert_fairy_source_StepDetector_mc_92_54_94_20_stop:
+            goto @_Users_oliverkoeth_work_vert_fairy_source_StepDetector_mc_92_20_96_20_if_end;
+_Users_oliverkoeth_work_vert_fairy_source_StepDetector_mc_92_20_96_20_if_else_false:
+_Users_oliverkoeth_work_vert_fairy_source_StepDetector_mc_94_27_96_20_start:
+[ "/Users/oliverkoeth/work/vert-fairy/source/StepDetector.mc" 95 24 ]
+            symbol [ _lastSampleTimestamp %tmp.32 95 36 56 ];
+            %tmp.32 = getv ? :_lastSampleTimestamp;
+            %tmp.33 = as %tmp.32 { (!Null) };
+            symbol [ _samplePeriodMs %tmp.35 95 59 74 ];
+            %tmp.35 = getv ? :_samplePeriodMs;
+            %tmp.36 = add %tmp.33 %tmp.35;
+            lputv %timestamp.5 %tmp.36;
+            symbol [ timestamp %timestamp.5 95 24 33 ];
+_Users_oliverkoeth_work_vert_fairy_source_StepDetector_mc_94_27_96_20_stop:
+_Users_oliverkoeth_work_vert_fairy_source_StepDetector_mc_92_20_96_20_if_end:
+_Users_oliverkoeth_work_vert_fairy_source_StepDetector_mc_91_39_97_16_stop:
+            goto @_Users_oliverkoeth_work_vert_fairy_source_StepDetector_mc_91_16_97_16_if_end;
+_Users_oliverkoeth_work_vert_fairy_source_StepDetector_mc_91_16_97_16_if_end:
+[ "/Users/oliverkoeth/work/vert-fairy/source/StepDetector.mc" 98 16 ]
+            %tmp.37 = lgetv %timestamp.5;
+            symbol [ timestamp %tmp.37 98 39 48 ];
+            symbol [ _lastSampleTimestamp ? 98 16 36 ];
+            putv self :_lastSampleTimestamp %tmp.37;
+[ "/Users/oliverkoeth/work/vert-fairy/source/StepDetector.mc" 100 16 ]
+            [ "_Users_oliverkoeth_work_vert_fairy_source_StepDetector_mc_85_53_157_12_start" "_Users_oliverkoeth_work_vert_fairy_source_StepDetector_mc_85_53_157_12_stop" ]
+            %x.6 = local;
+            symbol [ x %x.6 100 20 21 ];
+            %tmp.38 = lgetv %sample.4;
+            symbol [ sample %tmp.38 100 24 30 ];
+            %tmp.40 = const :x;
+            symbol [ x %tmp.40 100 32 33 const ];
+            %tmp.41 = agetv %tmp.38 %tmp.40;
+            lputv %x.6 %tmp.41;
+            symbol [ x %x.6 100 20 21 ];
+[ "/Users/oliverkoeth/work/vert-fairy/source/StepDetector.mc" 101 16 ]
+            [ "_Users_oliverkoeth_work_vert_fairy_source_StepDetector_mc_85_53_157_12_start" "_Users_oliverkoeth_work_vert_fairy_source_StepDetector_mc_85_53_157_12_stop" ]
+            %y.7 = local;
+            symbol [ y %y.7 101 20 21 ];
+            %tmp.42 = lgetv %sample.4;
+            symbol [ sample %tmp.42 101 24 30 ];
+            %tmp.44 = const :y;
+            symbol [ y %tmp.44 101 32 33 const ];
+            %tmp.45 = agetv %tmp.42 %tmp.44;
+            lputv %y.7 %tmp.45;
+            symbol [ y %y.7 101 20 21 ];
+[ "/Users/oliverkoeth/work/vert-fairy/source/StepDetector.mc" 102 16 ]
+            [ "_Users_oliverkoeth_work_vert_fairy_source_StepDetector_mc_85_53_157_12_start" "_Users_oliverkoeth_work_vert_fairy_source_StepDetector_mc_85_53_157_12_stop" ]
+            %z.8 = local;
+            symbol [ z %z.8 102 20 21 ];
+            %tmp.46 = lgetv %sample.4;
+            symbol [ sample %tmp.46 102 24 30 ];
+            %tmp.48 = const :z;
+            symbol [ z %tmp.48 102 32 33 const ];
+            %tmp.49 = agetv %tmp.46 %tmp.48;
+            lputv %z.8 %tmp.49;
+            symbol [ z %z.8 102 20 21 ];
+[ "/Users/oliverkoeth/work/vert-fairy/source/StepDetector.mc" 104 16 ]
+_Users_oliverkoeth_work_vert_fairy_source_StepDetector_mc_104_16_106_16_if_stmt:
+_Users_oliverkoeth_work_vert_fairy_source_StepDetector_mc_104_20_104_51_begin:
+_Users_oliverkoeth_work_vert_fairy_source_StepDetector_mc_104_20_104_38_begin:
+            %tmp.50 = lgetv %x.6;
+            symbol [ x %tmp.50 104 20 21 ];
+            %tmp.51 = null;
+            %tmp.52 = eq %tmp.50 %tmp.51;
+            bt %tmp.52 @_Users_oliverkoeth_work_vert_fairy_source_StepDetector_mc_104_16_106_16_if_true;
+_Users_oliverkoeth_work_vert_fairy_source_StepDetector_mc_104_33_104_38_false:
+            %tmp.53 = lgetv %y.7;
+            symbol [ y %tmp.53 104 33 34 ];
+            %tmp.54 = null;
+            %tmp.55 = eq %tmp.53 %tmp.54;
+            push %tmp.55;
+_Users_oliverkoeth_work_vert_fairy_source_StepDetector_mc_104_33_104_38_end:
+            %tmp.56 = phi [%tmp.52 @_Users_oliverkoeth_work_vert_fairy_source_StepDetector_mc_104_20_104_38_begin] [%tmp.55 @_Users_oliverkoeth_work_vert_fairy_source_StepDetector_mc_104_33_104_38_false] [%tmp.56 @_Users_oliverkoeth_work_vert_fairy_source_StepDetector_mc_104_33_104_38_end];
+            bt %tmp.56 @_Users_oliverkoeth_work_vert_fairy_source_StepDetector_mc_104_16_106_16_if_true;
+_Users_oliverkoeth_work_vert_fairy_source_StepDetector_mc_104_46_104_51_false:
+            %tmp.57 = lgetv %z.8;
+            symbol [ z %tmp.57 104 46 47 ];
+            %tmp.58 = null;
+            %tmp.59 = eq %tmp.57 %tmp.58;
+            push %tmp.59;
+_Users_oliverkoeth_work_vert_fairy_source_StepDetector_mc_104_46_104_51_end:
+            %tmp.60 = phi [%tmp.56 @_Users_oliverkoeth_work_vert_fairy_source_StepDetector_mc_104_20_104_51_begin] [%tmp.59 @_Users_oliverkoeth_work_vert_fairy_source_StepDetector_mc_104_46_104_51_false] [%tmp.60 @_Users_oliverkoeth_work_vert_fairy_source_StepDetector_mc_104_46_104_51_end];
+            bf %tmp.60 @_Users_oliverkoeth_work_vert_fairy_source_StepDetector_mc_104_16_106_16_if_end;
+_Users_oliverkoeth_work_vert_fairy_source_StepDetector_mc_104_16_106_16_if_true:
+_Users_oliverkoeth_work_vert_fairy_source_StepDetector_mc_104_57_106_16_start:
+[ "/Users/oliverkoeth/work/vert-fairy/source/StepDetector.mc" 105 20 ]
+            goto break @_Users_oliverkoeth_work_vert_fairy_source_StepDetector_mc_85_12_157_12_for_incr;
+_Users_oliverkoeth_work_vert_fairy_source_StepDetector_mc_104_57_106_16_stop:
+            goto @_Users_oliverkoeth_work_vert_fairy_source_StepDetector_mc_104_16_106_16_if_end;
+_Users_oliverkoeth_work_vert_fairy_source_StepDetector_mc_104_16_106_16_if_end:
+[ "/Users/oliverkoeth/work/vert-fairy/source/StepDetector.mc" 108 16 ]
+            symbol [ _buffer %tmp.62 108 16 23 ];
+            %tmp.62 = getv ? :_buffer;
+            symbol [ add %tmp.63 108 24 27 ];
+            %tmp.63 = getv function %tmp.62 :add;
+            %tmp.64 = newd 3;
+            %tmp.66 = const :x;
+            symbol [ x %tmp.66 108 31 32 const ];
+            %tmp.67 = lgetv %x.6;
+            symbol [ x %tmp.67 108 36 37 ];
+            %tmp.68 = dup %tmp.64;
+            %tmp.69 = aputv %tmp.68 %tmp.66 %tmp.67;
+            %tmp.71 = const :y;
+            symbol [ y %tmp.71 108 40 41 const ];
+            %tmp.72 = lgetv %y.7;
+            symbol [ y %tmp.72 108 45 46 ];
+            %tmp.73 = dup %tmp.69;
+            %tmp.74 = aputv %tmp.73 %tmp.71 %tmp.72;
+            %tmp.76 = const :z;
+            symbol [ z %tmp.76 108 49 50 const ];
+            %tmp.77 = lgetv %z.8;
+            symbol [ z %tmp.77 108 54 55 ];
+            %tmp.78 = dup %tmp.74;
+            %tmp.79 = aputv %tmp.78 %tmp.76 %tmp.77;
+            invoke %tmp.62 %tmp.63(%tmp.79);
+[ "/Users/oliverkoeth/work/vert-fairy/source/StepDetector.mc" 109 16 ]
+            symbol [ _sumX %tmp.80 109 16 21 ];
+            %tmp.80 = getv self :_sumX;
+            %tmp.81 = lgetv %x.6;
+            symbol [ x %tmp.81 109 25 26 ];
+            %tmp.82 = add %tmp.80 %tmp.81;
+            symbol [ _sumX ? 109 16 21 ];
+            putv self :_sumX dup %tmp.82;
+[ "/Users/oliverkoeth/work/vert-fairy/source/StepDetector.mc" 110 16 ]
+            symbol [ _sumY %tmp.83 110 16 21 ];
+            %tmp.83 = getv self :_sumY;
+            %tmp.84 = lgetv %y.7;
+            symbol [ y %tmp.84 110 25 26 ];
+            %tmp.85 = add %tmp.83 %tmp.84;
+            symbol [ _sumY ? 110 16 21 ];
+            putv self :_sumY dup %tmp.85;
+[ "/Users/oliverkoeth/work/vert-fairy/source/StepDetector.mc" 111 16 ]
+            symbol [ _sumZ %tmp.86 111 16 21 ];
+            %tmp.86 = getv self :_sumZ;
+            %tmp.87 = lgetv %z.8;
+            symbol [ z %tmp.87 111 25 26 ];
+            %tmp.88 = add %tmp.86 %tmp.87;
+            symbol [ _sumZ ? 111 16 21 ];
+            putv self :_sumZ dup %tmp.88;
+[ "/Users/oliverkoeth/work/vert-fairy/source/StepDetector.mc" 113 16 ]
+_Users_oliverkoeth_work_vert_fairy_source_StepDetector_mc_113_16_118_16_if_stmt:
+            symbol [ _buffer %tmp.90 113 20 27 ];
+            %tmp.90 = getv ? :_buffer;
+            symbol [ size %tmp.91 113 28 32 ];
+            %tmp.91 = getv function %tmp.90 :size;
+            %tmp.92 = invoke %tmp.90 %tmp.91();
+            symbol [ _gravityWindow %tmp.94 113 37 51 ];
+            %tmp.94 = getv ? :_gravityWindow;
+            %tmp.95 = gt %tmp.92 %tmp.94;
+            bf %tmp.95 @_Users_oliverkoeth_work_vert_fairy_source_StepDetector_mc_113_16_118_16_if_end;
+_Users_oliverkoeth_work_vert_fairy_source_StepDetector_mc_113_16_118_16_if_true:
+_Users_oliverkoeth_work_vert_fairy_source_StepDetector_mc_113_53_118_16_start:
+[ "/Users/oliverkoeth/work/vert-fairy/source/StepDetector.mc" 114 20 ]
+            [ "_Users_oliverkoeth_work_vert_fairy_source_StepDetector_mc_113_53_118_16_start" "_Users_oliverkoeth_work_vert_fairy_source_StepDetector_mc_113_53_118_16_stop" ]
+            %removed.9 = local;
+            symbol [ removed %removed.9 114 24 31 ];
+            symbol [ _buffer %tmp.97 114 34 41 ];
+            %tmp.97 = getv ? :_buffer;
+            symbol [ remove %tmp.98 114 42 48 ];
+            %tmp.98 = getv function %tmp.97 :remove;
+            %tmp.99 = 0;
+            %tmp.100 = invoke %tmp.97 %tmp.98(%tmp.99);
+            lputv %removed.9 %tmp.100;
+            symbol [ removed %removed.9 114 24 31 ];
+[ "/Users/oliverkoeth/work/vert-fairy/source/StepDetector.mc" 115 20 ]
+            symbol [ _sumX %tmp.101 115 20 25 ];
+            %tmp.101 = getv self :_sumX;
+            %tmp.102 = lgetv %removed.9;
+            symbol [ removed %tmp.102 115 29 36 ];
+            %tmp.104 = const :x;
+            symbol [ x %tmp.104 115 38 39 const ];
+            %tmp.105 = agetv %tmp.102 %tmp.104;
+            %tmp.106 = sub %tmp.101 %tmp.105;
+            symbol [ _sumX ? 115 20 25 ];
+            putv self :_sumX dup %tmp.106;
+[ "/Users/oliverkoeth/work/vert-fairy/source/StepDetector.mc" 116 20 ]
+            symbol [ _sumY %tmp.107 116 20 25 ];
+            %tmp.107 = getv self :_sumY;
+            %tmp.108 = lgetv %removed.9;
+            symbol [ removed %tmp.108 116 29 36 ];
+            %tmp.110 = const :y;
+            symbol [ y %tmp.110 116 38 39 const ];
+            %tmp.111 = agetv %tmp.108 %tmp.110;
+            %tmp.112 = sub %tmp.107 %tmp.111;
+            symbol [ _sumY ? 116 20 25 ];
+            putv self :_sumY dup %tmp.112;
+[ "/Users/oliverkoeth/work/vert-fairy/source/StepDetector.mc" 117 20 ]
+            symbol [ _sumZ %tmp.113 117 20 25 ];
+            %tmp.113 = getv self :_sumZ;
+            %tmp.114 = lgetv %removed.9;
+            symbol [ removed %tmp.114 117 29 36 ];
+            %tmp.116 = const :z;
+            symbol [ z %tmp.116 117 38 39 const ];
+            %tmp.117 = agetv %tmp.114 %tmp.116;
+            %tmp.118 = sub %tmp.113 %tmp.117;
+            symbol [ _sumZ ? 117 20 25 ];
+            putv self :_sumZ dup %tmp.118;
+_Users_oliverkoeth_work_vert_fairy_source_StepDetector_mc_113_53_118_16_stop:
+            goto @_Users_oliverkoeth_work_vert_fairy_source_StepDetector_mc_113_16_118_16_if_end;
+_Users_oliverkoeth_work_vert_fairy_source_StepDetector_mc_113_16_118_16_if_end:
+[ "/Users/oliverkoeth/work/vert-fairy/source/StepDetector.mc" 120 16 ]
+            [ "_Users_oliverkoeth_work_vert_fairy_source_StepDetector_mc_85_53_157_12_start" "_Users_oliverkoeth_work_vert_fairy_source_StepDetector_mc_85_53_157_12_stop" ]
+            %currentWindowSize.10 = local;
+            symbol [ currentWindowSize %currentWindowSize.10 120 20 37 ];
+            symbol [ _buffer %tmp.120 120 40 47 ];
+            %tmp.120 = getv ? :_buffer;
+            symbol [ size %tmp.121 120 48 52 ];
+            %tmp.121 = getv function %tmp.120 :size;
+            %tmp.122 = invoke %tmp.120 %tmp.121();
+            lputv %currentWindowSize.10 %tmp.122;
+            symbol [ currentWindowSize %currentWindowSize.10 120 20 37 ];
+[ "/Users/oliverkoeth/work/vert-fairy/source/StepDetector.mc" 121 16 ]
+_Users_oliverkoeth_work_vert_fairy_source_StepDetector_mc_121_16_123_16_if_stmt:
+            %tmp.123 = lgetv %currentWindowSize.10;
+            symbol [ currentWindowSize %tmp.123 121 20 37 ];
+            %tmp.124 = 0;
+            %tmp.125 = eq %tmp.123 %tmp.124;
+            bf %tmp.125 @_Users_oliverkoeth_work_vert_fairy_source_StepDetector_mc_121_16_123_16_if_end;
+_Users_oliverkoeth_work_vert_fairy_source_StepDetector_mc_121_16_123_16_if_true:
+_Users_oliverkoeth_work_vert_fairy_source_StepDetector_mc_121_44_123_16_start:
+[ "/Users/oliverkoeth/work/vert-fairy/source/StepDetector.mc" 122 20 ]
+            goto break @_Users_oliverkoeth_work_vert_fairy_source_StepDetector_mc_85_12_157_12_for_incr;
+_Users_oliverkoeth_work_vert_fairy_source_StepDetector_mc_121_44_123_16_stop:
+            goto @_Users_oliverkoeth_work_vert_fairy_source_StepDetector_mc_121_16_123_16_if_end;
+_Users_oliverkoeth_work_vert_fairy_source_StepDetector_mc_121_16_123_16_if_end:
+[ "/Users/oliverkoeth/work/vert-fairy/source/StepDetector.mc" 124 16 ]
+            [ "_Users_oliverkoeth_work_vert_fairy_source_StepDetector_mc_85_53_157_12_start" "_Users_oliverkoeth_work_vert_fairy_source_StepDetector_mc_85_53_157_12_stop" ]
+            %avgX.11 = local;
+            symbol [ avgX %avgX.11 124 20 24 ];
+            symbol [ _sumX %tmp.127 124 27 32 ];
+            %tmp.127 = getv ? :_sumX;
+            %tmp.128 = lgetv %currentWindowSize.10;
+            symbol [ currentWindowSize %tmp.128 124 35 52 ];
+            %tmp.129 = div %tmp.127 %tmp.128;
+            lputv %avgX.11 %tmp.129;
+            symbol [ avgX %avgX.11 124 20 24 ];
+[ "/Users/oliverkoeth/work/vert-fairy/source/StepDetector.mc" 125 16 ]
+            [ "_Users_oliverkoeth_work_vert_fairy_source_StepDetector_mc_85_53_157_12_start" "_Users_oliverkoeth_work_vert_fairy_source_StepDetector_mc_85_53_157_12_stop" ]
+            %avgY.12 = local;
+            symbol [ avgY %avgY.12 125 20 24 ];
+            symbol [ _sumY %tmp.131 125 27 32 ];
+            %tmp.131 = getv ? :_sumY;
+            %tmp.132 = lgetv %currentWindowSize.10;
+            symbol [ currentWindowSize %tmp.132 125 35 52 ];
+            %tmp.133 = div %tmp.131 %tmp.132;
+            lputv %avgY.12 %tmp.133;
+            symbol [ avgY %avgY.12 125 20 24 ];
+[ "/Users/oliverkoeth/work/vert-fairy/source/StepDetector.mc" 126 16 ]
+            [ "_Users_oliverkoeth_work_vert_fairy_source_StepDetector_mc_85_53_157_12_start" "_Users_oliverkoeth_work_vert_fairy_source_StepDetector_mc_85_53_157_12_stop" ]
+            %avgZ.13 = local;
+            symbol [ avgZ %avgZ.13 126 20 24 ];
+            symbol [ _sumZ %tmp.135 126 27 32 ];
+            %tmp.135 = getv ? :_sumZ;
+            %tmp.136 = lgetv %currentWindowSize.10;
+            symbol [ currentWindowSize %tmp.136 126 35 52 ];
+            %tmp.137 = div %tmp.135 %tmp.136;
+            lputv %avgZ.13 %tmp.137;
+            symbol [ avgZ %avgZ.13 126 20 24 ];
+[ "/Users/oliverkoeth/work/vert-fairy/source/StepDetector.mc" 128 16 ]
+            [ "_Users_oliverkoeth_work_vert_fairy_source_StepDetector_mc_85_53_157_12_start" "_Users_oliverkoeth_work_vert_fairy_source_StepDetector_mc_85_53_157_12_stop" ]
+            %filteredX.14 = local;
+            symbol [ filteredX %filteredX.14 128 20 29 ];
+            %tmp.138 = lgetv %x.6;
+            symbol [ x %tmp.138 128 32 33 ];
+            %tmp.139 = lgetv %avgX.11;
+            symbol [ avgX %tmp.139 128 36 40 ];
+            %tmp.140 = sub %tmp.138 %tmp.139;
+            lputv %filteredX.14 %tmp.140;
+            symbol [ filteredX %filteredX.14 128 20 29 ];
+[ "/Users/oliverkoeth/work/vert-fairy/source/StepDetector.mc" 129 16 ]
+            [ "_Users_oliverkoeth_work_vert_fairy_source_StepDetector_mc_85_53_157_12_start" "_Users_oliverkoeth_work_vert_fairy_source_StepDetector_mc_85_53_157_12_stop" ]
+            %filteredY.15 = local;
+            symbol [ filteredY %filteredY.15 129 20 29 ];
+            %tmp.141 = lgetv %y.7;
+            symbol [ y %tmp.141 129 32 33 ];
+            %tmp.142 = lgetv %avgY.12;
+            symbol [ avgY %tmp.142 129 36 40 ];
+            %tmp.143 = sub %tmp.141 %tmp.142;
+            lputv %filteredY.15 %tmp.143;
+            symbol [ filteredY %filteredY.15 129 20 29 ];
+[ "/Users/oliverkoeth/work/vert-fairy/source/StepDetector.mc" 130 16 ]
+            [ "_Users_oliverkoeth_work_vert_fairy_source_StepDetector_mc_85_53_157_12_start" "_Users_oliverkoeth_work_vert_fairy_source_StepDetector_mc_85_53_157_12_stop" ]
+            %filteredZ.16 = local;
+            symbol [ filteredZ %filteredZ.16 130 20 29 ];
+            %tmp.144 = lgetv %z.8;
+            symbol [ z %tmp.144 130 32 33 ];
+            %tmp.145 = lgetv %avgZ.13;
+            symbol [ avgZ %tmp.145 130 36 40 ];
+            %tmp.146 = sub %tmp.144 %tmp.145;
+            lputv %filteredZ.16 %tmp.146;
+            symbol [ filteredZ %filteredZ.16 130 20 29 ];
+[ "/Users/oliverkoeth/work/vert-fairy/source/StepDetector.mc" 132 16 ]
+            [ "_Users_oliverkoeth_work_vert_fairy_source_StepDetector_mc_85_53_157_12_start" "_Users_oliverkoeth_work_vert_fairy_source_StepDetector_mc_85_53_157_12_stop" ]
+            %magnitude.17 = local;
+            symbol [ magnitude %magnitude.17 132 20 29 ];
+            symbol [ Math %tmp.147 132 32 36 ];
+            %tmp.147 = getm $.Toybox.Math;
+            symbol [ sqrt %tmp.148 132 37 41 ];
+            %tmp.148 = getv function %tmp.147 :sqrt;
+            %tmp.149 = lgetv %filteredX.14;
+            symbol [ filteredX %tmp.149 132 42 51 ];
+            %tmp.150 = lgetv %filteredX.14;
+            symbol [ filteredX %tmp.150 132 54 63 ];
+            %tmp.151 = mul %tmp.149 %tmp.150;
+            %tmp.152 = lgetv %filteredY.15;
+            symbol [ filteredY %tmp.152 132 66 75 ];
+            %tmp.153 = lgetv %filteredY.15;
+            symbol [ filteredY %tmp.153 132 78 87 ];
+            %tmp.154 = mul %tmp.152 %tmp.153;
+            %tmp.155 = add %tmp.151 %tmp.154;
+            %tmp.156 = lgetv %filteredZ.16;
+            symbol [ filteredZ %tmp.156 132 90 99 ];
+            %tmp.157 = lgetv %filteredZ.16;
+            symbol [ filteredZ %tmp.157 132 102 111 ];
+            %tmp.158 = mul %tmp.156 %tmp.157;
+            %tmp.159 = add %tmp.155 %tmp.158;
+            %tmp.160 = invoke %tmp.147 %tmp.148(%tmp.159);
+            lputv %magnitude.17 %tmp.160;
+            symbol [ magnitude %magnitude.17 132 20 29 ];
+[ "/Users/oliverkoeth/work/vert-fairy/source/StepDetector.mc" 134 16 ]
+_Users_oliverkoeth_work_vert_fairy_source_StepDetector_mc_134_16_138_16_if_stmt:
+            symbol [ _avgMag %tmp.162 134 20 27 ];
+            %tmp.162 = getv ? :_avgMag;
+            %tmp.163 = null;
+            %tmp.164 = eq %tmp.162 %tmp.163;
+            bf %tmp.164 @_Users_oliverkoeth_work_vert_fairy_source_StepDetector_mc_134_16_138_16_if_else_false;
+_Users_oliverkoeth_work_vert_fairy_source_StepDetector_mc_134_16_138_16_if_true:
+_Users_oliverkoeth_work_vert_fairy_source_StepDetector_mc_134_37_136_16_start:
+[ "/Users/oliverkoeth/work/vert-fairy/source/StepDetector.mc" 135 20 ]
+            %tmp.165 = lgetv %magnitude.17;
+            symbol [ magnitude %tmp.165 135 30 39 ];
+            symbol [ _avgMag ? 135 20 27 ];
+            putv self :_avgMag %tmp.165;
+_Users_oliverkoeth_work_vert_fairy_source_StepDetector_mc_134_37_136_16_stop:
+            goto @_Users_oliverkoeth_work_vert_fairy_source_StepDetector_mc_134_16_138_16_if_end;
+_Users_oliverkoeth_work_vert_fairy_source_StepDetector_mc_134_16_138_16_if_else_false:
+_Users_oliverkoeth_work_vert_fairy_source_StepDetector_mc_136_23_138_16_start:
+[ "/Users/oliverkoeth/work/vert-fairy/source/StepDetector.mc" 137 20 ]
+            symbol [ _avgMag %tmp.166 137 20 27 ];
+            %tmp.166 = getv self :_avgMag;
+            %tmp.167 = as %tmp.166 { (!Null) };
+            symbol [ _alpha %tmp.169 137 31 37 ];
+            %tmp.169 = getv ? :_alpha;
+            %tmp.170 = lgetv %magnitude.17;
+            symbol [ magnitude %tmp.170 137 41 50 ];
+            symbol [ _avgMag %tmp.172 137 53 60 ];
+            %tmp.172 = getv ? :_avgMag;
+            %tmp.173 = as %tmp.172 { (!Null) };
+            %tmp.174 = sub %tmp.170 %tmp.173;
+            %tmp.175 = mul %tmp.169 %tmp.174;
+            %tmp.176 = add %tmp.167 %tmp.175;
+            symbol [ _avgMag ? 137 20 27 ];
+            putv self :_avgMag dup %tmp.176;
+_Users_oliverkoeth_work_vert_fairy_source_StepDetector_mc_136_23_138_16_stop:
+_Users_oliverkoeth_work_vert_fairy_source_StepDetector_mc_134_16_138_16_if_end:
+[ "/Users/oliverkoeth/work/vert-fairy/source/StepDetector.mc" 140 16 ]
+            [ "_Users_oliverkoeth_work_vert_fairy_source_StepDetector_mc_85_53_157_12_start" "_Users_oliverkoeth_work_vert_fairy_source_StepDetector_mc_85_53_157_12_stop" ]
+            %deviation.18 = local;
+            symbol [ deviation %deviation.18 140 20 29 ];
+            %tmp.177 = self;
+            symbol [ abs %tmp.178 140 32 35 ];
+            %tmp.178 = getv function %tmp.177 :abs;
+            %tmp.179 = lgetv %magnitude.17;
+            symbol [ magnitude %tmp.179 140 36 45 ];
+            symbol [ _avgMag %tmp.181 140 48 55 ];
+            %tmp.181 = getv ? :_avgMag;
+            %tmp.182 = sub %tmp.179 %tmp.181;
+            %tmp.183 = invoke %tmp.177 %tmp.178(%tmp.182);
+            lputv %deviation.18 %tmp.183;
+            symbol [ deviation %deviation.18 140 20 29 ];
+[ "/Users/oliverkoeth/work/vert-fairy/source/StepDetector.mc" 141 16 ]
+_Users_oliverkoeth_work_vert_fairy_source_StepDetector_mc_141_16_145_16_if_stmt:
+            symbol [ _avgDeviation %tmp.185 141 20 33 ];
+            %tmp.185 = getv ? :_avgDeviation;
+            %tmp.186 = null;
+            %tmp.187 = eq %tmp.185 %tmp.186;
+            bf %tmp.187 @_Users_oliverkoeth_work_vert_fairy_source_StepDetector_mc_141_16_145_16_if_else_false;
+_Users_oliverkoeth_work_vert_fairy_source_StepDetector_mc_141_16_145_16_if_true:
+_Users_oliverkoeth_work_vert_fairy_source_StepDetector_mc_141_43_143_16_start:
+[ "/Users/oliverkoeth/work/vert-fairy/source/StepDetector.mc" 142 20 ]
+            %tmp.188 = lgetv %deviation.18;
+            symbol [ deviation %tmp.188 142 36 45 ];
+            symbol [ _avgDeviation ? 142 20 33 ];
+            putv self :_avgDeviation %tmp.188;
+_Users_oliverkoeth_work_vert_fairy_source_StepDetector_mc_141_43_143_16_stop:
+            goto @_Users_oliverkoeth_work_vert_fairy_source_StepDetector_mc_141_16_145_16_if_end;
+_Users_oliverkoeth_work_vert_fairy_source_StepDetector_mc_141_16_145_16_if_else_false:
+_Users_oliverkoeth_work_vert_fairy_source_StepDetector_mc_143_23_145_16_start:
+[ "/Users/oliverkoeth/work/vert-fairy/source/StepDetector.mc" 144 20 ]
+            symbol [ _avgDeviation %tmp.189 144 20 33 ];
+            %tmp.189 = getv self :_avgDeviation;
+            %tmp.190 = as %tmp.189 { (!Null) };
+            symbol [ _beta %tmp.192 144 37 42 ];
+            %tmp.192 = getv ? :_beta;
+            %tmp.193 = lgetv %deviation.18;
+            symbol [ deviation %tmp.193 144 46 55 ];
+            symbol [ _avgDeviation %tmp.195 144 58 71 ];
+            %tmp.195 = getv ? :_avgDeviation;
+            %tmp.196 = as %tmp.195 { (!Null) };
+            %tmp.197 = sub %tmp.193 %tmp.196;
+            %tmp.198 = mul %tmp.192 %tmp.197;
+            %tmp.199 = add %tmp.190 %tmp.198;
+            symbol [ _avgDeviation ? 144 20 33 ];
+            putv self :_avgDeviation dup %tmp.199;
+_Users_oliverkoeth_work_vert_fairy_source_StepDetector_mc_143_23_145_16_stop:
+_Users_oliverkoeth_work_vert_fairy_source_StepDetector_mc_141_16_145_16_if_end:
+[ "/Users/oliverkoeth/work/vert-fairy/source/StepDetector.mc" 147 16 ]
+            [ "_Users_oliverkoeth_work_vert_fairy_source_StepDetector_mc_85_53_157_12_start" "_Users_oliverkoeth_work_vert_fairy_source_StepDetector_mc_85_53_157_12_stop" ]
+            %dynamicThreshold.19 = local;
+            symbol [ dynamicThreshold %dynamicThreshold.19 147 20 36 ];
+            symbol [ _avgMag %tmp.201 147 39 46 ];
+            %tmp.201 = getv ? :_avgMag;
+            %tmp.202 = self;
+            symbol [ max %tmp.203 147 49 52 ];
+            %tmp.203 = getv function %tmp.202 :max;
+            symbol [ _minThreshold %tmp.205 147 53 66 ];
+            %tmp.205 = getv ? :_minThreshold;
+            symbol [ _sensitivity %tmp.207 147 68 80 ];
+            %tmp.207 = getv ? :_sensitivity;
+_Users_oliverkoeth_work_vert_fairy_source_StepDetector_mc_147_84_147_124_begin:
+            symbol [ _avgDeviation %tmp.209 147 84 97 ];
+            %tmp.209 = getv ? :_avgDeviation;
+            %tmp.210 = null;
+            %tmp.211 = ne %tmp.209 %tmp.210;
+            bf %tmp.211 @_Users_oliverkoeth_work_vert_fairy_source_StepDetector_mc_147_84_147_124_else_false;
+_Users_oliverkoeth_work_vert_fairy_source_StepDetector_mc_147_84_147_124_true:
+            symbol [ _avgDeviation %tmp.213 147 108 121 ];
+            %tmp.213 = getv ? :_avgDeviation;
+            %tmp.214 = as %tmp.213 { (!Null) };
+            push %tmp.214;
+            goto @_Users_oliverkoeth_work_vert_fairy_source_StepDetector_mc_147_84_147_124_end;
+_Users_oliverkoeth_work_vert_fairy_source_StepDetector_mc_147_84_147_124_else_false:
+            %tmp.215 = 0;
+            push %tmp.215;
+_Users_oliverkoeth_work_vert_fairy_source_StepDetector_mc_147_84_147_124_end:
+            %tmp.216 = phi [%tmp.211 @_Users_oliverkoeth_work_vert_fairy_source_StepDetector_mc_147_84_147_124_begin] [%tmp.214 @_Users_oliverkoeth_work_vert_fairy_source_StepDetector_mc_147_84_147_124_true] [%tmp.215 @_Users_oliverkoeth_work_vert_fairy_source_StepDetector_mc_147_84_147_124_else_false] [%tmp.216 @_Users_oliverkoeth_work_vert_fairy_source_StepDetector_mc_147_84_147_124_end];
+            %tmp.217 = mul %tmp.207 %tmp.216;
+            %tmp.218 = invoke %tmp.202 %tmp.203(%tmp.205, %tmp.217);
+            %tmp.219 = add %tmp.201 %tmp.218;
+            lputv %dynamicThreshold.19 %tmp.219;
+            symbol [ dynamicThreshold %dynamicThreshold.19 147 20 36 ];
+[ "/Users/oliverkoeth/work/vert-fairy/source/StepDetector.mc" 148 16 ]
+            [ "_Users_oliverkoeth_work_vert_fairy_source_StepDetector_mc_85_53_157_12_start" "_Users_oliverkoeth_work_vert_fairy_source_StepDetector_mc_85_53_157_12_stop" ]
+            %above.20 = local;
+            symbol [ above %above.20 148 20 25 ];
+            %tmp.220 = lgetv %magnitude.17;
+            symbol [ magnitude %tmp.220 148 28 37 ];
+            %tmp.221 = lgetv %dynamicThreshold.19;
+            symbol [ dynamicThreshold %tmp.221 148 40 56 ];
+            %tmp.222 = gt %tmp.220 %tmp.221;
+            lputv %above.20 %tmp.222;
+            symbol [ above %above.20 148 20 25 ];
+[ "/Users/oliverkoeth/work/vert-fairy/source/StepDetector.mc" 149 16 ]
+_Users_oliverkoeth_work_vert_fairy_source_StepDetector_mc_149_16_155_16_if_stmt:
+_Users_oliverkoeth_work_vert_fairy_source_StepDetector_mc_149_20_149_30_begin:
+            %tmp.223 = lgetv %above.20;
+            symbol [ above %tmp.223 149 20 25 ];
+            bf %tmp.223 @_Users_oliverkoeth_work_vert_fairy_source_StepDetector_mc_149_16_155_16_if_end;
+_Users_oliverkoeth_work_vert_fairy_source_StepDetector_mc_149_29_149_30_true:
+            symbol [ _lastAboveThreshold %tmp.225 149 30 49 ];
+            %tmp.225 = getv ? :_lastAboveThreshold;
+            %tmp.226 = not %tmp.225;
+            push %tmp.226;
+_Users_oliverkoeth_work_vert_fairy_source_StepDetector_mc_149_29_149_30_end:
+            %tmp.227 = phi [%tmp.223 @_Users_oliverkoeth_work_vert_fairy_source_StepDetector_mc_149_20_149_30_begin] [%tmp.226 @_Users_oliverkoeth_work_vert_fairy_source_StepDetector_mc_149_29_149_30_true] [%tmp.227 @_Users_oliverkoeth_work_vert_fairy_source_StepDetector_mc_149_29_149_30_end];
+            bf %tmp.227 @_Users_oliverkoeth_work_vert_fairy_source_StepDetector_mc_149_16_155_16_if_end;
+_Users_oliverkoeth_work_vert_fairy_source_StepDetector_mc_149_16_155_16_if_true:
+_Users_oliverkoeth_work_vert_fairy_source_StepDetector_mc_149_51_155_16_start:
+[ "/Users/oliverkoeth/work/vert-fairy/source/StepDetector.mc" 150 20 ]
+_Users_oliverkoeth_work_vert_fairy_source_StepDetector_mc_150_20_154_20_if_stmt:
+_Users_oliverkoeth_work_vert_fairy_source_StepDetector_mc_150_24_150_92_begin:
+            symbol [ _lastSampleTimestamp %tmp.229 150 24 44 ];
+            %tmp.229 = getv ? :_lastSampleTimestamp;
+            %tmp.230 = null;
+            %tmp.231 = eq %tmp.229 %tmp.230;
+            bt %tmp.231 @_Users_oliverkoeth_work_vert_fairy_source_StepDetector_mc_150_20_154_20_if_true;
+_Users_oliverkoeth_work_vert_fairy_source_StepDetector_mc_150_56_150_92_false:
+            %tmp.232 = lgetv %timestamp.5;
+            symbol [ timestamp %tmp.232 150 57 66 ];
+            symbol [ _lastStepTimestamp %tmp.234 150 69 87 ];
+            %tmp.234 = getv ? :_lastStepTimestamp;
+            %tmp.235 = sub %tmp.232 %tmp.234;
+            symbol [ _refractoryMs %tmp.237 150 92 105 ];
+            %tmp.237 = getv ? :_refractoryMs;
+            %tmp.238 = gte %tmp.235 %tmp.237;
+            push %tmp.238;
+_Users_oliverkoeth_work_vert_fairy_source_StepDetector_mc_150_56_150_92_end:
+            %tmp.239 = phi [%tmp.231 @_Users_oliverkoeth_work_vert_fairy_source_StepDetector_mc_150_24_150_92_begin] [%tmp.238 @_Users_oliverkoeth_work_vert_fairy_source_StepDetector_mc_150_56_150_92_false] [%tmp.239 @_Users_oliverkoeth_work_vert_fairy_source_StepDetector_mc_150_56_150_92_end];
+            bf %tmp.239 @_Users_oliverkoeth_work_vert_fairy_source_StepDetector_mc_150_20_154_20_if_end;
+_Users_oliverkoeth_work_vert_fairy_source_StepDetector_mc_150_20_154_20_if_true:
+_Users_oliverkoeth_work_vert_fairy_source_StepDetector_mc_150_107_154_20_start:
+[ "/Users/oliverkoeth/work/vert-fairy/source/StepDetector.mc" 151 24 ]
+            symbol [ _stepCount %tmp.240 151 24 34 ];
+            %tmp.240 = getv self :_stepCount;
+            %tmp.241 = 1;
+            %tmp.242 = add %tmp.240 %tmp.241;
+            symbol [ _stepCount ? 151 24 34 ];
+            putv self :_stepCount dup %tmp.242;
+[ "/Users/oliverkoeth/work/vert-fairy/source/StepDetector.mc" 152 24 ]
+            %tmp.243 = lgetv %newSteps.1;
+            symbol [ newSteps %tmp.243 152 24 32 ];
+            %tmp.244 = 1;
+            %tmp.245 = add %tmp.243 %tmp.244;
+            lputv %newSteps.1 %tmp.245;
+            symbol [ newSteps %newSteps.1 152 24 32 ];
+[ "/Users/oliverkoeth/work/vert-fairy/source/StepDetector.mc" 153 24 ]
+            %tmp.246 = lgetv %timestamp.5;
+            symbol [ timestamp %tmp.246 153 45 54 ];
+            symbol [ _lastStepTimestamp ? 153 24 42 ];
+            putv self :_lastStepTimestamp %tmp.246;
+_Users_oliverkoeth_work_vert_fairy_source_StepDetector_mc_150_107_154_20_stop:
+            goto @_Users_oliverkoeth_work_vert_fairy_source_StepDetector_mc_150_20_154_20_if_end;
+_Users_oliverkoeth_work_vert_fairy_source_StepDetector_mc_150_20_154_20_if_end:
+_Users_oliverkoeth_work_vert_fairy_source_StepDetector_mc_149_51_155_16_stop:
+            goto @_Users_oliverkoeth_work_vert_fairy_source_StepDetector_mc_149_16_155_16_if_end;
+_Users_oliverkoeth_work_vert_fairy_source_StepDetector_mc_149_16_155_16_if_end:
+[ "/Users/oliverkoeth/work/vert-fairy/source/StepDetector.mc" 156 16 ]
+            %tmp.247 = lgetv %above.20;
+            symbol [ above %tmp.247 156 38 43 ];
+            symbol [ _lastAboveThreshold ? 156 16 35 ];
+            putv self :_lastAboveThreshold %tmp.247;
+_Users_oliverkoeth_work_vert_fairy_source_StepDetector_mc_85_53_157_12_stop:
+_Users_oliverkoeth_work_vert_fairy_source_StepDetector_mc_85_12_157_12_for_incr:
+[ "/Users/oliverkoeth/work/vert-fairy/source/StepDetector.mc" 85 ]
+            %tmp.248 = lgetv %i.3;
+            symbol [ i %tmp.248 85 45 46 ];
+            %tmp.249 = 1;
+            %tmp.250 = add %tmp.248 %tmp.249;
+            lputv %i.3 %tmp.250;
+            symbol [ i %i.3 85 45 46 ];
+            goto @_Users_oliverkoeth_work_vert_fairy_source_StepDetector_mc_85_12_157_12_for_test;
+_Users_oliverkoeth_work_vert_fairy_source_StepDetector_mc_85_12_157_12_for_end:
+[ "/Users/oliverkoeth/work/vert-fairy/source/StepDetector.mc" 158 12 ]
+            %tmp.251 = lgetv %newSteps.1;
+            symbol [ newSteps %tmp.251 158 19 27 ];
+            ret %tmp.251;
+_Users_oliverkoeth_work_vert_fairy_source_StepDetector_mc_79_37_159_8_stop:
+        }
+    }
+}
+[ @file = "/Users/oliverkoeth/work/vert-fairy/source/StepDetector.mc"; @line = 1; ]
+<init> {
+}

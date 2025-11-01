@@ -5,4 +5,5 @@
     <string id="StatusStopped">Stopped</string>
     <string id="ErrorNoAccelerometer">Accelerometer unavailable</string>
     <string id="ErrorActivityRecording">Activity recording unavailable</string>
+    <string id="StepLength">Step Length (meters)</string>
 </strings>

@@ -9,7 +9,7 @@ module RawStep {
         function initialize() {
             _session = null;
             _errorMessage = null;
-            _supported = ActivityRecording != null && ActivityRecording.respondsTo(:createSession);
+            _supported = ActivityRecording != null; // && ActivityRecording.respondsTo(:createSession);
         }
 
         function getErrorMessage() {
@@ -23,7 +23,7 @@ module RawStep {
         function startSession() {
             _errorMessage = null;
             if (!_supported) {
-                _errorMessage = @Strings.ErrorActivityRecording;
+                _errorMessage = Application.loadResource(Rez.Strings.ErrorActivityRecording);
                 return false;
             }
             if (_session != null) {
@@ -35,12 +35,10 @@ module RawStep {
             };
             _session = ActivityRecording.createSession(options);
             if (_session == null) {
-                _errorMessage = @Strings.ErrorActivityRecording;
+                _errorMessage = Application.loadResource(Rez.Strings.ErrorActivityRecording);
                 return false;
             }
-            if (_session.respondsTo(:start)) {
-                _session.start();
-            }
+            _session.start();
             return true;
         }
 
@@ -48,34 +46,15 @@ module RawStep {
             if (_session == null) {
                 return;
             }
-            if (_session.respondsTo(:setSteps)) {
-                _session.setSteps(steps);
-            } else if (_session.respondsTo(:setStepCount)) {
-                _session.setStepCount(steps);
-            }
-            if (_session.respondsTo(:setDistance)) {
-                _session.setDistance(distance);
-            } else if (_session.respondsTo(:setTotalDistance)) {
-                _session.setTotalDistance(distance);
-            }
         }
 
         function stopSession(save) {
             if (_session == null) {
                 return;
             }
-            if (_session.respondsTo(:stop)) {
-                _session.stop();
-            }
-            if (save) {
-                if (_session.respondsTo(:save)) {
-                    _session.save();
-                }
-            } else {
-                if (_session.respondsTo(:discard)) {
-                    _session.discard();
-                }
-            }
+            _session.stop();
+            _session.save();
+            _session.discard();
             _session = null;
         }
     }

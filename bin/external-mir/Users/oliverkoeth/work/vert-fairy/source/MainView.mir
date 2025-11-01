@@ -1,0 +1,1088 @@
+[ @file = "/Users/oliverkoeth/work/vert-fairy/source/MainView.mc"; @line = 1; @symbol_usingdef<0> = [Toybox,1,6,12]; @symbol_usingdef<1> = [Graphics,1,13,21]; @symbol_usingAlias = [Graphics,1,25,33]; ]
+using Toybox.Graphics as :Graphics;
+[ @file = "/Users/oliverkoeth/work/vert-fairy/source/MainView.mc"; @line = 2; @symbol_usingdef<0> = [Toybox,2,6,12]; @symbol_usingdef<1> = [Lang,2,13,17]; ]
+using Toybox.Lang;
+[ @file = "/Users/oliverkoeth/work/vert-fairy/source/MainView.mc"; @line = 3; @symbol_usingdef<0> = [Toybox,3,6,12]; @symbol_usingdef<1> = [Sensor,3,13,19]; @symbol_usingAlias = [Sensor,3,23,29]; ]
+using Toybox.Sensor as :Sensor;
+[ @file = "/Users/oliverkoeth/work/vert-fairy/source/MainView.mc"; @line = 4; @symbol_usingdef<0> = [Toybox,4,6,12]; @symbol_usingdef<1> = [System,4,13,19]; @symbol_usingAlias = [System,4,23,29]; ]
+using Toybox.System as :System;
+[ @file = "/Users/oliverkoeth/work/vert-fairy/source/MainView.mc"; @line = 5; @symbol_usingdef<0> = [Toybox,5,6,12]; @symbol_usingdef<1> = [WatchUi,5,13,20]; @symbol_usingAlias = [WatchUi,5,24,31]; ]
+using Toybox.WatchUi as :WatchUi;
+[ @file = "/Users/oliverkoeth/work/vert-fairy/source/MainView.mc"; @line = 7; @symbol_moduledef = [RawStep,7,7,14]; ]
+module RawStep {
+    [ @file = "/Users/oliverkoeth/work/vert-fairy/source/MainView.mc"; @line = 7; ]
+    <init> {
+    }
+    [ @file = "/Users/oliverkoeth/work/vert-fairy/source/MainView.mc"; @line = 8; @symbol_classdef = [MainView,8,10,18]; @symbol_extends<0> = [WatchUi,8,27,34]; @symbol_extends<1> = [View,8,35,39]; ]
+    class MainView extends WatchUi.View {
+        [ @file = "/Users/oliverkoeth/work/vert-fairy/source/MainView.mc"; @line = 8; ]
+        <init> {
+        }
+        [ @file = "/Users/oliverkoeth/work/vert-fairy/source/MainView.mc"; @line = 8; ]
+        static
+        <init> {
+        }
+        [ @file = "/Users/oliverkoeth/work/vert-fairy/source/MainView.mc"; @line = 9; @position = 14; @symbol_constdef = [SAMPLE_PERIOD_MS,9,14,30]; ]
+        const SAMPLE_PERIOD_MS = 40;
+        [ @file = "/Users/oliverkoeth/work/vert-fairy/source/MainView.mc"; @line = 11; @position = 12; @symbol_vardef = [_state,11,12,18]; ]
+        var _state;
+        [ @file = "/Users/oliverkoeth/work/vert-fairy/source/MainView.mc"; @line = 12; @position = 12; @symbol_vardef = [_detector,12,12,21]; ]
+        var _detector;
+        [ @file = "/Users/oliverkoeth/work/vert-fairy/source/MainView.mc"; @line = 13; @position = 12; @symbol_vardef = [_sessionService,13,12,27]; ]
+        var _sessionService;
+        [ @file = "/Users/oliverkoeth/work/vert-fairy/source/MainView.mc"; @line = 14; @position = 12; @symbol_vardef = [_hasAccelerometer,14,12,29]; ]
+        var _hasAccelerometer;
+        [ @file = "/Users/oliverkoeth/work/vert-fairy/source/MainView.mc"; @line = 15; @position = 12; @symbol_vardef = [_accelActive,15,12,24]; ]
+        var _accelActive;
+        [ @file = "/Users/oliverkoeth/work/vert-fairy/source/MainView.mc"; @line = 16; @position = 12; @symbol_vardef = [_lastUiUpdate,16,12,25]; ]
+        var _lastUiUpdate;
+        [ @file = "/Users/oliverkoeth/work/vert-fairy/source/MainView.mc"; @line = 18; @symbol_functiondef = [initialize,18,17,27]; @symbol_param<0> = [state,18,28,33]; @symbol_param<1> = [detector,18,35,43]; @symbol_param<2> = [sessionService,18,45,59]; ]
+        function initialize(state, detector, sessionService) as Void {
+_Users_oliverkoeth_work_vert_fairy_source_MainView_mc_18_61_27_8_start:
+[ "/Users/oliverkoeth/work/vert-fairy/source/MainView.mc" 19 12 ]
+            symbol [ WatchUi %tmp.1 19 12 19 ];
+            %tmp.1 = getm $.Toybox.WatchUi;
+            symbol [ View %tmp.2 19 20 24 ];
+            %tmp.2 = getv %tmp.1 :View;
+            symbol [ initialize %tmp.3 19 25 35 ];
+            %tmp.3 = getv function %tmp.2 :initialize;
+            invoke %tmp.2 %tmp.3();
+[ "/Users/oliverkoeth/work/vert-fairy/source/MainView.mc" 20 12 ]
+            %tmp.4 = lgetv %state;
+            symbol [ state %tmp.4 20 21 26 ];
+            symbol [ _state ? 20 12 18 ];
+            putv self :_state %tmp.4;
+[ "/Users/oliverkoeth/work/vert-fairy/source/MainView.mc" 21 12 ]
+            %tmp.5 = lgetv %detector;
+            symbol [ detector %tmp.5 21 24 32 ];
+            symbol [ _detector ? 21 12 21 ];
+            putv self :_detector %tmp.5;
+[ "/Users/oliverkoeth/work/vert-fairy/source/MainView.mc" 22 12 ]
+            %tmp.6 = lgetv %sessionService;
+            symbol [ sessionService %tmp.6 22 30 44 ];
+            symbol [ _sessionService ? 22 12 27 ];
+            putv self :_sessionService %tmp.6;
+[ "/Users/oliverkoeth/work/vert-fairy/source/MainView.mc" 23 12 ]
+            %tmp.7 = false;
+            symbol [ _accelActive ? 23 12 24 ];
+            putv self :_accelActive %tmp.7;
+[ "/Users/oliverkoeth/work/vert-fairy/source/MainView.mc" 24 12 ]
+            %tmp.8 = 0;
+            symbol [ _lastUiUpdate ? 24 12 25 ];
+            putv self :_lastUiUpdate %tmp.8;
+[ "/Users/oliverkoeth/work/vert-fairy/source/MainView.mc" 25 12 ]
+            %tmp.9 = self;
+            symbol [ _checkAccelerometer %tmp.10 25 32 51 ];
+            %tmp.10 = getv function %tmp.9 :_checkAccelerometer;
+            %tmp.11 = invoke %tmp.9 %tmp.10();
+            symbol [ _hasAccelerometer ? 25 12 29 ];
+            putv self :_hasAccelerometer %tmp.11;
+[ "/Users/oliverkoeth/work/vert-fairy/source/MainView.mc" 26 12 ]
+            %tmp.12 = self;
+            symbol [ setUpdatePeriod %tmp.13 26 12 27 ];
+            %tmp.13 = getv function %tmp.12 :setUpdatePeriod;
+            %tmp.14 = 1;
+            invoke %tmp.12 %tmp.13(%tmp.14);
+_Users_oliverkoeth_work_vert_fairy_source_MainView_mc_18_61_27_8_stop:
+        }
+        [ @file = "/Users/oliverkoeth/work/vert-fairy/source/MainView.mc"; @line = 29; @symbol_functiondef = [_checkAccelerometer,29,17,36]; ]
+        function _checkAccelerometer() {
+_Users_oliverkoeth_work_vert_fairy_source_MainView_mc_29_39_37_8_start:
+[ "/Users/oliverkoeth/work/vert-fairy/source/MainView.mc" 30 12 ]
+_Users_oliverkoeth_work_vert_fairy_source_MainView_mc_30_12_32_12_if_stmt:
+            symbol [ Sensor %tmp.1 30 16 22 ];
+            %tmp.1 = getm $.Toybox.Sensor;
+            %tmp.2 = null;
+            %tmp.3 = eq %tmp.1 %tmp.2;
+            bf %tmp.3 @_Users_oliverkoeth_work_vert_fairy_source_MainView_mc_30_12_32_12_if_end;
+_Users_oliverkoeth_work_vert_fairy_source_MainView_mc_30_12_32_12_if_true:
+_Users_oliverkoeth_work_vert_fairy_source_MainView_mc_30_32_32_12_start:
+[ "/Users/oliverkoeth/work/vert-fairy/source/MainView.mc" 31 16 ]
+            %tmp.4 = false;
+            ret %tmp.4;
+_Users_oliverkoeth_work_vert_fairy_source_MainView_mc_30_32_32_12_stop:
+            goto @_Users_oliverkoeth_work_vert_fairy_source_MainView_mc_30_12_32_12_if_end;
+_Users_oliverkoeth_work_vert_fairy_source_MainView_mc_30_12_32_12_if_end:
+[ "/Users/oliverkoeth/work/vert-fairy/source/MainView.mc" 33 12 ]
+_Users_oliverkoeth_work_vert_fairy_source_MainView_mc_33_12_35_12_if_stmt:
+            symbol [ Sensor %tmp.5 33 16 22 ];
+            %tmp.5 = getm $.Toybox.Sensor;
+            symbol [ respondsTo %tmp.6 33 23 33 ];
+            %tmp.6 = getv function %tmp.5 :respondsTo;
+            %tmp.8 = const :hasAccelerometer;
+            symbol [ hasAccelerometer %tmp.8 33 35 51 const ];
+            %tmp.9 = invoke %tmp.5 %tmp.6(%tmp.8);
+            bf %tmp.9 @_Users_oliverkoeth_work_vert_fairy_source_MainView_mc_33_12_35_12_if_end;
+_Users_oliverkoeth_work_vert_fairy_source_MainView_mc_33_12_35_12_if_true:
+_Users_oliverkoeth_work_vert_fairy_source_MainView_mc_33_54_35_12_start:
+[ "/Users/oliverkoeth/work/vert-fairy/source/MainView.mc" 34 16 ]
+            symbol [ Sensor %tmp.10 34 23 29 ];
+            %tmp.10 = getm $.Toybox.Sensor;
+            symbol [ hasAccelerometer %tmp.11 34 30 46 ];
+            %tmp.11 = getv function %tmp.10 :hasAccelerometer;
+            %tmp.12 = invoke %tmp.10 %tmp.11();
+            ret %tmp.12;
+_Users_oliverkoeth_work_vert_fairy_source_MainView_mc_33_54_35_12_stop:
+            goto @_Users_oliverkoeth_work_vert_fairy_source_MainView_mc_33_12_35_12_if_end;
+_Users_oliverkoeth_work_vert_fairy_source_MainView_mc_33_12_35_12_if_end:
+[ "/Users/oliverkoeth/work/vert-fairy/source/MainView.mc" 36 12 ]
+            %tmp.13 = true;
+            ret %tmp.13;
+_Users_oliverkoeth_work_vert_fairy_source_MainView_mc_29_39_37_8_stop:
+        }
+        [ @file = "/Users/oliverkoeth/work/vert-fairy/source/MainView.mc"; @line = 39; @symbol_functiondef = [onShow,39,17,23]; ]
+        function onShow() {
+_Users_oliverkoeth_work_vert_fairy_source_MainView_mc_39_26_43_8_start:
+[ "/Users/oliverkoeth/work/vert-fairy/source/MainView.mc" 40 12 ]
+_Users_oliverkoeth_work_vert_fairy_source_MainView_mc_40_12_42_12_if_stmt:
+            symbol [ _state %tmp.2 40 16 22 ];
+            %tmp.2 = getv ? :_state;
+            %tmp.4 = const :running;
+            symbol [ running %tmp.4 40 24 31 const ];
+            %tmp.5 = agetv %tmp.2 %tmp.4;
+            bf %tmp.5 @_Users_oliverkoeth_work_vert_fairy_source_MainView_mc_40_12_42_12_if_end;
+_Users_oliverkoeth_work_vert_fairy_source_MainView_mc_40_12_42_12_if_true:
+_Users_oliverkoeth_work_vert_fairy_source_MainView_mc_40_34_42_12_start:
+[ "/Users/oliverkoeth/work/vert-fairy/source/MainView.mc" 41 16 ]
+            %tmp.6 = self;
+            symbol [ _registerAccelerometer %tmp.7 41 16 38 ];
+            %tmp.7 = getv function %tmp.6 :_registerAccelerometer;
+            invoke %tmp.6 %tmp.7();
+_Users_oliverkoeth_work_vert_fairy_source_MainView_mc_40_34_42_12_stop:
+            goto @_Users_oliverkoeth_work_vert_fairy_source_MainView_mc_40_12_42_12_if_end;
+_Users_oliverkoeth_work_vert_fairy_source_MainView_mc_40_12_42_12_if_end:
+_Users_oliverkoeth_work_vert_fairy_source_MainView_mc_39_26_43_8_stop:
+        }
+        [ @file = "/Users/oliverkoeth/work/vert-fairy/source/MainView.mc"; @line = 45; @symbol_functiondef = [onHide,45,17,23]; ]
+        function onHide() {
+_Users_oliverkoeth_work_vert_fairy_source_MainView_mc_45_26_47_8_start:
+[ "/Users/oliverkoeth/work/vert-fairy/source/MainView.mc" 46 12 ]
+            %tmp.1 = self;
+            symbol [ _unregisterAccelerometer %tmp.2 46 12 36 ];
+            %tmp.2 = getv function %tmp.1 :_unregisterAccelerometer;
+            invoke %tmp.1 %tmp.2();
+_Users_oliverkoeth_work_vert_fairy_source_MainView_mc_45_26_47_8_stop:
+        }
+        [ @file = "/Users/oliverkoeth/work/vert-fairy/source/MainView.mc"; @line = 49; @symbol_functiondef = [onLayout,49,17,25]; @symbol_param<0> = [dc,49,26,28]; ]
+        function onLayout(dc) {
+        }
+        [ @file = "/Users/oliverkoeth/work/vert-fairy/source/MainView.mc"; @line = 52; @symbol_functiondef = [onUpdate,52,17,25]; @symbol_param<0> = [dc,52,26,28]; ]
+        function onUpdate(dc) {
+_Users_oliverkoeth_work_vert_fairy_source_MainView_mc_52_30_75_8_start:
+[ "/Users/oliverkoeth/work/vert-fairy/source/MainView.mc" 53 12 ]
+            [ "_Users_oliverkoeth_work_vert_fairy_source_MainView_mc_52_30_75_8_start" "_Users_oliverkoeth_work_vert_fairy_source_MainView_mc_52_30_75_8_stop" ]
+            %width.1 = local;
+            symbol [ width %width.1 53 16 21 ];
+            %tmp.1 = lgetv %dc;
+            symbol [ dc %tmp.1 53 24 26 ];
+            symbol [ getWidth %tmp.2 53 27 35 ];
+            %tmp.2 = getv function %tmp.1 :getWidth;
+            %tmp.3 = invoke %tmp.1 %tmp.2();
+            lputv %width.1 %tmp.3;
+            symbol [ width %width.1 53 16 21 ];
+[ "/Users/oliverkoeth/work/vert-fairy/source/MainView.mc" 54 12 ]
+            [ "_Users_oliverkoeth_work_vert_fairy_source_MainView_mc_52_30_75_8_start" "_Users_oliverkoeth_work_vert_fairy_source_MainView_mc_52_30_75_8_stop" ]
+            %height.2 = local;
+            symbol [ height %height.2 54 16 22 ];
+            %tmp.4 = lgetv %dc;
+            symbol [ dc %tmp.4 54 25 27 ];
+            symbol [ getHeight %tmp.5 54 28 37 ];
+            %tmp.5 = getv function %tmp.4 :getHeight;
+            %tmp.6 = invoke %tmp.4 %tmp.5();
+            lputv %height.2 %tmp.6;
+            symbol [ height %height.2 54 16 22 ];
+[ "/Users/oliverkoeth/work/vert-fairy/source/MainView.mc" 55 12 ]
+            %tmp.7 = lgetv %dc;
+            symbol [ dc %tmp.7 55 12 14 ];
+            symbol [ clear %tmp.8 55 15 20 ];
+            %tmp.8 = getv function %tmp.7 :clear;
+            invoke %tmp.7 %tmp.8();
+[ "/Users/oliverkoeth/work/vert-fairy/source/MainView.mc" 56 12 ]
+            %tmp.9 = lgetv %dc;
+            symbol [ dc %tmp.9 56 12 14 ];
+            symbol [ setColor %tmp.10 56 15 23 ];
+            %tmp.10 = getv function %tmp.9 :setColor;
+            symbol [ Graphics %tmp.11 56 24 32 ];
+            %tmp.11 = getm $.Toybox.Graphics;
+            symbol [ COLOR_WHITE %tmp.12 56 33 44 ];
+            %tmp.12 = getv %tmp.11 :COLOR_WHITE;
+            symbol [ Graphics %tmp.13 56 46 54 ];
+            %tmp.13 = getm $.Toybox.Graphics;
+            symbol [ COLOR_TRANSPARENT %tmp.14 56 55 72 ];
+            %tmp.14 = getv %tmp.13 :COLOR_TRANSPARENT;
+            invoke %tmp.9 %tmp.10(%tmp.12, %tmp.14);
+[ "/Users/oliverkoeth/work/vert-fairy/source/MainView.mc" 57 12 ]
+            %tmp.15 = lgetv %dc;
+            symbol [ dc %tmp.15 57 12 14 ];
+            symbol [ drawText %tmp.16 57 15 23 ];
+            %tmp.16 = getv function %tmp.15 :drawText;
+            %tmp.17 = lgetv %width.1;
+            symbol [ width %tmp.17 57 24 29 ];
+            %tmp.18 = 2;
+            %tmp.19 = div %tmp.17 %tmp.18;
+            %tmp.20 = lgetv %height.2;
+            symbol [ height %tmp.20 57 35 41 ];
+            %tmp.21 = 0.2;
+            %tmp.22 = mul %tmp.20 %tmp.21;
+            symbol [ Graphics %tmp.23 57 49 57 ];
+            %tmp.23 = getm $.Toybox.Graphics;
+            symbol [ FONT_XLARGE %tmp.24 57 58 69 ];
+            %tmp.24 = getv %tmp.23 :FONT_XLARGE;
+            %tmp.25 = "Steps";
+            symbol [ Graphics %tmp.26 57 80 88 ];
+            %tmp.26 = getm $.Toybox.Graphics;
+            symbol [ TEXT_JUSTIFY_CENTER %tmp.27 57 89 108 ];
+            %tmp.27 = getv %tmp.26 :TEXT_JUSTIFY_CENTER;
+            invoke %tmp.15 %tmp.16(%tmp.19, %tmp.22, %tmp.24, %tmp.25, %tmp.27);
+[ "/Users/oliverkoeth/work/vert-fairy/source/MainView.mc" 58 12 ]
+            %tmp.28 = lgetv %dc;
+            symbol [ dc %tmp.28 58 12 14 ];
+            symbol [ drawText %tmp.29 58 15 23 ];
+            %tmp.29 = getv function %tmp.28 :drawText;
+            %tmp.30 = lgetv %width.1;
+            symbol [ width %tmp.30 58 24 29 ];
+            %tmp.31 = 2;
+            %tmp.32 = div %tmp.30 %tmp.31;
+            %tmp.33 = lgetv %height.2;
+            symbol [ height %tmp.33 58 35 41 ];
+            %tmp.34 = 0.35;
+            %tmp.35 = mul %tmp.33 %tmp.34;
+            symbol [ Graphics %tmp.36 58 50 58 ];
+            %tmp.36 = getm $.Toybox.Graphics;
+            symbol [ FONT_NUMBER_TALL %tmp.37 58 59 75 ];
+            %tmp.37 = getv %tmp.36 :FONT_NUMBER_TALL;
+            %tmp.38 = self;
+            symbol [ _formatInt %tmp.39 58 77 87 ];
+            %tmp.39 = getv function %tmp.38 :_formatInt;
+            symbol [ _state %tmp.41 58 88 94 ];
+            %tmp.41 = getv ? :_state;
+            %tmp.43 = const :steps;
+            symbol [ steps %tmp.43 58 96 101 const ];
+            %tmp.44 = agetv %tmp.41 %tmp.43;
+            %tmp.45 = invoke %tmp.38 %tmp.39(%tmp.44);
+            symbol [ Graphics %tmp.46 58 105 113 ];
+            %tmp.46 = getm $.Toybox.Graphics;
+            symbol [ TEXT_JUSTIFY_CENTER %tmp.47 58 114 133 ];
+            %tmp.47 = getv %tmp.46 :TEXT_JUSTIFY_CENTER;
+            invoke %tmp.28 %tmp.29(%tmp.32, %tmp.35, %tmp.37, %tmp.45, %tmp.47);
+[ "/Users/oliverkoeth/work/vert-fairy/source/MainView.mc" 60 12 ]
+            %tmp.48 = lgetv %dc;
+            symbol [ dc %tmp.48 60 12 14 ];
+            symbol [ drawText %tmp.49 60 15 23 ];
+            %tmp.49 = getv function %tmp.48 :drawText;
+            %tmp.50 = lgetv %width.1;
+            symbol [ width %tmp.50 60 24 29 ];
+            %tmp.51 = 2;
+            %tmp.52 = div %tmp.50 %tmp.51;
+            %tmp.53 = lgetv %height.2;
+            symbol [ height %tmp.53 60 35 41 ];
+            %tmp.54 = 0.55;
+            %tmp.55 = mul %tmp.53 %tmp.54;
+            symbol [ Graphics %tmp.56 60 50 58 ];
+            %tmp.56 = getm $.Toybox.Graphics;
+            symbol [ FONT_XLARGE %tmp.57 60 59 70 ];
+            %tmp.57 = getv %tmp.56 :FONT_XLARGE;
+            %tmp.58 = "Distance (m)";
+            symbol [ Graphics %tmp.59 60 88 96 ];
+            %tmp.59 = getm $.Toybox.Graphics;
+            symbol [ TEXT_JUSTIFY_CENTER %tmp.60 60 97 116 ];
+            %tmp.60 = getv %tmp.59 :TEXT_JUSTIFY_CENTER;
+            invoke %tmp.48 %tmp.49(%tmp.52, %tmp.55, %tmp.57, %tmp.58, %tmp.60);
+[ "/Users/oliverkoeth/work/vert-fairy/source/MainView.mc" 61 12 ]
+            %tmp.61 = lgetv %dc;
+            symbol [ dc %tmp.61 61 12 14 ];
+            symbol [ drawText %tmp.62 61 15 23 ];
+            %tmp.62 = getv function %tmp.61 :drawText;
+            %tmp.63 = lgetv %width.1;
+            symbol [ width %tmp.63 61 24 29 ];
+            %tmp.64 = 2;
+            %tmp.65 = div %tmp.63 %tmp.64;
+            %tmp.66 = lgetv %height.2;
+            symbol [ height %tmp.66 61 35 41 ];
+            %tmp.67 = 0.7;
+            %tmp.68 = mul %tmp.66 %tmp.67;
+            symbol [ Graphics %tmp.69 61 49 57 ];
+            %tmp.69 = getm $.Toybox.Graphics;
+            symbol [ FONT_NUMBER_MEDIUM %tmp.70 61 58 76 ];
+            %tmp.70 = getv %tmp.69 :FONT_NUMBER_MEDIUM;
+            %tmp.71 = self;
+            symbol [ _formatDistance %tmp.72 61 78 93 ];
+            %tmp.72 = getv function %tmp.71 :_formatDistance;
+            symbol [ _state %tmp.74 61 94 100 ];
+            %tmp.74 = getv ? :_state;
+            %tmp.76 = const :distance;
+            symbol [ distance %tmp.76 61 102 110 const ];
+            %tmp.77 = agetv %tmp.74 %tmp.76;
+            %tmp.78 = invoke %tmp.71 %tmp.72(%tmp.77);
+            symbol [ Graphics %tmp.79 61 114 122 ];
+            %tmp.79 = getm $.Toybox.Graphics;
+            symbol [ TEXT_JUSTIFY_CENTER %tmp.80 61 123 142 ];
+            %tmp.80 = getv %tmp.79 :TEXT_JUSTIFY_CENTER;
+            invoke %tmp.61 %tmp.62(%tmp.65, %tmp.68, %tmp.70, %tmp.78, %tmp.80);
+[ "/Users/oliverkoeth/work/vert-fairy/source/MainView.mc" 63 12 ]
+            [ "_Users_oliverkoeth_work_vert_fairy_source_MainView_mc_52_30_75_8_start" "_Users_oliverkoeth_work_vert_fairy_source_MainView_mc_52_30_75_8_stop" ]
+            %statusString.3 = local;
+            symbol [ statusString %statusString.3 63 16 28 ];
+_Users_oliverkoeth_work_vert_fairy_source_MainView_mc_63_31_63_84_begin:
+            symbol [ _state %tmp.82 63 31 37 ];
+            %tmp.82 = getv ? :_state;
+            %tmp.84 = const :running;
+            symbol [ running %tmp.84 63 39 46 const ];
+            %tmp.85 = agetv %tmp.82 %tmp.84;
+            bf %tmp.85 @_Users_oliverkoeth_work_vert_fairy_source_MainView_mc_63_31_63_84_else_false;
+_Users_oliverkoeth_work_vert_fairy_source_MainView_mc_63_31_63_84_true:
+            symbol [ Strings %tmp.87 63 51 58 ];
+            %tmp.87 = getv ? :Strings;
+            symbol [ StatusRunning %tmp.88 63 59 72 ];
+            %tmp.88 = getv %tmp.87 :StatusRunning;
+            push %tmp.88;
+            goto @_Users_oliverkoeth_work_vert_fairy_source_MainView_mc_63_31_63_84_end;
+_Users_oliverkoeth_work_vert_fairy_source_MainView_mc_63_31_63_84_else_false:
+            symbol [ Strings %tmp.90 63 76 83 ];
+            %tmp.90 = getv ? :Strings;
+            symbol [ StatusStopped %tmp.91 63 84 97 ];
+            %tmp.91 = getv %tmp.90 :StatusStopped;
+            push %tmp.91;
+_Users_oliverkoeth_work_vert_fairy_source_MainView_mc_63_31_63_84_end:
+            %tmp.92 = phi [%tmp.85 @_Users_oliverkoeth_work_vert_fairy_source_MainView_mc_63_31_63_84_begin] [%tmp.88 @_Users_oliverkoeth_work_vert_fairy_source_MainView_mc_63_31_63_84_true] [%tmp.91 @_Users_oliverkoeth_work_vert_fairy_source_MainView_mc_63_31_63_84_else_false] [%tmp.92 @_Users_oliverkoeth_work_vert_fairy_source_MainView_mc_63_31_63_84_end];
+            lputv %statusString.3 %tmp.92;
+            symbol [ statusString %statusString.3 63 16 28 ];
+[ "/Users/oliverkoeth/work/vert-fairy/source/MainView.mc" 64 12 ]
+            %tmp.93 = lgetv %dc;
+            symbol [ dc %tmp.93 64 12 14 ];
+            symbol [ drawText %tmp.94 64 15 23 ];
+            %tmp.94 = getv function %tmp.93 :drawText;
+            %tmp.95 = lgetv %width.1;
+            symbol [ width %tmp.95 64 24 29 ];
+            %tmp.96 = 2;
+            %tmp.97 = div %tmp.95 %tmp.96;
+            %tmp.98 = lgetv %height.2;
+            symbol [ height %tmp.98 64 35 41 ];
+            %tmp.99 = 0.85;
+            %tmp.100 = mul %tmp.98 %tmp.99;
+            symbol [ Graphics %tmp.101 64 50 58 ];
+            %tmp.101 = getm $.Toybox.Graphics;
+            symbol [ FONT_LARGE %tmp.102 64 59 69 ];
+            %tmp.102 = getv %tmp.101 :FONT_LARGE;
+            %tmp.103 = lgetv %statusString.3;
+            symbol [ statusString %tmp.103 64 71 83 ];
+            symbol [ Graphics %tmp.104 64 85 93 ];
+            %tmp.104 = getm $.Toybox.Graphics;
+            symbol [ TEXT_JUSTIFY_CENTER %tmp.105 64 94 113 ];
+            %tmp.105 = getv %tmp.104 :TEXT_JUSTIFY_CENTER;
+            invoke %tmp.93 %tmp.94(%tmp.97, %tmp.100, %tmp.102, %tmp.103, %tmp.105);
+[ "/Users/oliverkoeth/work/vert-fairy/source/MainView.mc" 66 12 ]
+_Users_oliverkoeth_work_vert_fairy_source_MainView_mc_66_12_73_12_if_stmt:
+            symbol [ _hasAccelerometer %tmp.107 66 17 34 ];
+            %tmp.107 = getv ? :_hasAccelerometer;
+            %tmp.108 = not %tmp.107;
+            bf %tmp.108 @_Users_oliverkoeth_work_vert_fairy_source_MainView_mc_66_12_73_12_if_else_false;
+_Users_oliverkoeth_work_vert_fairy_source_MainView_mc_66_12_73_12_if_true:
+_Users_oliverkoeth_work_vert_fairy_source_MainView_mc_66_36_68_12_start:
+[ "/Users/oliverkoeth/work/vert-fairy/source/MainView.mc" 67 16 ]
+            %tmp.109 = lgetv %dc;
+            symbol [ dc %tmp.109 67 16 18 ];
+            symbol [ drawText %tmp.110 67 19 27 ];
+            %tmp.110 = getv function %tmp.109 :drawText;
+            %tmp.111 = lgetv %width.1;
+            symbol [ width %tmp.111 67 28 33 ];
+            %tmp.112 = 2;
+            %tmp.113 = div %tmp.111 %tmp.112;
+            %tmp.114 = lgetv %height.2;
+            symbol [ height %tmp.114 67 39 45 ];
+            %tmp.115 = 0.92;
+            %tmp.116 = mul %tmp.114 %tmp.115;
+            symbol [ Graphics %tmp.117 67 54 62 ];
+            %tmp.117 = getm $.Toybox.Graphics;
+            symbol [ FONT_SMALL %tmp.118 67 63 73 ];
+            %tmp.118 = getv %tmp.117 :FONT_SMALL;
+            symbol [ Strings %tmp.120 67 76 83 ];
+            %tmp.120 = getv ? :Strings;
+            symbol [ ErrorNoAccelerometer %tmp.121 67 84 104 ];
+            %tmp.121 = getv %tmp.120 :ErrorNoAccelerometer;
+            symbol [ Graphics %tmp.122 67 106 114 ];
+            %tmp.122 = getm $.Toybox.Graphics;
+            symbol [ TEXT_JUSTIFY_CENTER %tmp.123 67 115 134 ];
+            %tmp.123 = getv %tmp.122 :TEXT_JUSTIFY_CENTER;
+            invoke %tmp.109 %tmp.110(%tmp.113, %tmp.116, %tmp.118, %tmp.121, %tmp.123);
+_Users_oliverkoeth_work_vert_fairy_source_MainView_mc_66_36_68_12_stop:
+            goto @_Users_oliverkoeth_work_vert_fairy_source_MainView_mc_66_12_73_12_if_end;
+_Users_oliverkoeth_work_vert_fairy_source_MainView_mc_66_12_73_12_if_else_false:
+_Users_oliverkoeth_work_vert_fairy_source_MainView_mc_68_19_73_12_start:
+[ "/Users/oliverkoeth/work/vert-fairy/source/MainView.mc" 69 16 ]
+            [ "_Users_oliverkoeth_work_vert_fairy_source_MainView_mc_68_19_73_12_start" "_Users_oliverkoeth_work_vert_fairy_source_MainView_mc_68_19_73_12_stop" ]
+            %error.4 = local;
+            symbol [ error %error.4 69 20 25 ];
+            symbol [ _state %tmp.125 69 28 34 ];
+            %tmp.125 = getv ? :_state;
+            %tmp.127 = const :sessionError;
+            symbol [ sessionError %tmp.127 69 36 48 const ];
+            %tmp.128 = agetv %tmp.125 %tmp.127;
+            lputv %error.4 %tmp.128;
+            symbol [ error %error.4 69 20 25 ];
+[ "/Users/oliverkoeth/work/vert-fairy/source/MainView.mc" 70 16 ]
+_Users_oliverkoeth_work_vert_fairy_source_MainView_mc_70_16_72_16_if_stmt:
+            %tmp.129 = lgetv %error.4;
+            symbol [ error %tmp.129 70 20 25 ];
+            %tmp.130 = null;
+            %tmp.131 = ne %tmp.129 %tmp.130;
+            bf %tmp.131 @_Users_oliverkoeth_work_vert_fairy_source_MainView_mc_70_16_72_16_if_end;
+_Users_oliverkoeth_work_vert_fairy_source_MainView_mc_70_16_72_16_if_true:
+_Users_oliverkoeth_work_vert_fairy_source_MainView_mc_70_35_72_16_start:
+[ "/Users/oliverkoeth/work/vert-fairy/source/MainView.mc" 71 20 ]
+            %tmp.132 = lgetv %dc;
+            symbol [ dc %tmp.132 71 20 22 ];
+            symbol [ drawText %tmp.133 71 23 31 ];
+            %tmp.133 = getv function %tmp.132 :drawText;
+            %tmp.134 = lgetv %width.1;
+            symbol [ width %tmp.134 71 32 37 ];
+            %tmp.135 = 2;
+            %tmp.136 = div %tmp.134 %tmp.135;
+            %tmp.137 = lgetv %height.2;
+            symbol [ height %tmp.137 71 43 49 ];
+            %tmp.138 = 0.92;
+            %tmp.139 = mul %tmp.137 %tmp.138;
+            symbol [ Graphics %tmp.140 71 58 66 ];
+            %tmp.140 = getm $.Toybox.Graphics;
+            symbol [ FONT_SMALL %tmp.141 71 67 77 ];
+            %tmp.141 = getv %tmp.140 :FONT_SMALL;
+            %tmp.142 = lgetv %error.4;
+            symbol [ error %tmp.142 71 79 84 ];
+            %tmp.143 = as %tmp.142 { (!Null) };
+            symbol [ Graphics %tmp.144 71 86 94 ];
+            %tmp.144 = getm $.Toybox.Graphics;
+            symbol [ TEXT_JUSTIFY_CENTER %tmp.145 71 95 114 ];
+            %tmp.145 = getv %tmp.144 :TEXT_JUSTIFY_CENTER;
+            invoke %tmp.132 %tmp.133(%tmp.136, %tmp.139, %tmp.141, %tmp.143, %tmp.145);
+_Users_oliverkoeth_work_vert_fairy_source_MainView_mc_70_35_72_16_stop:
+            goto @_Users_oliverkoeth_work_vert_fairy_source_MainView_mc_70_16_72_16_if_end;
+_Users_oliverkoeth_work_vert_fairy_source_MainView_mc_70_16_72_16_if_end:
+_Users_oliverkoeth_work_vert_fairy_source_MainView_mc_68_19_73_12_stop:
+_Users_oliverkoeth_work_vert_fairy_source_MainView_mc_66_12_73_12_if_end:
+[ "/Users/oliverkoeth/work/vert-fairy/source/MainView.mc" 74 12 ]
+            symbol [ System %tmp.146 74 28 34 ];
+            %tmp.146 = getm $.Toybox.System;
+            symbol [ getTicks %tmp.147 74 35 43 ];
+            %tmp.147 = getv function %tmp.146 :getTicks;
+            %tmp.148 = invoke %tmp.146 %tmp.147();
+            symbol [ _lastUiUpdate ? 74 12 25 ];
+            putv self :_lastUiUpdate %tmp.148;
+_Users_oliverkoeth_work_vert_fairy_source_MainView_mc_52_30_75_8_stop:
+        }
+        [ @file = "/Users/oliverkoeth/work/vert-fairy/source/MainView.mc"; @line = 77; @symbol_functiondef = [_formatInt,77,17,27]; @symbol_param<0> = [value,77,28,33]; ]
+        function _formatInt(value) {
+_Users_oliverkoeth_work_vert_fairy_source_MainView_mc_77_35_79_8_start:
+[ "/Users/oliverkoeth/work/vert-fairy/source/MainView.mc" 78 12 ]
+            symbol [ Lang %tmp.1 78 19 23 ];
+            %tmp.1 = getm $.Toybox.Lang;
+            symbol [ format %tmp.2 78 24 30 ];
+            %tmp.2 = getv function %tmp.1 :format;
+            %tmp.3 = "%d";
+            %tmp.4 = newa 1;
+            %tmp.5 = lgetv %value;
+            symbol [ value %tmp.5 78 38 43 ];
+            %tmp.6 = dup %tmp.4;
+            %tmp.7 = aputv %tmp.6 0 %tmp.5;
+            %tmp.8 = invoke %tmp.1 %tmp.2(%tmp.3, %tmp.7);
+            ret %tmp.8;
+_Users_oliverkoeth_work_vert_fairy_source_MainView_mc_77_35_79_8_stop:
+        }
+        [ @file = "/Users/oliverkoeth/work/vert-fairy/source/MainView.mc"; @line = 81; @symbol_functiondef = [_formatDistance,81,17,32]; @symbol_param<0> = [distance,81,33,41]; ]
+        function _formatDistance(distance) {
+_Users_oliverkoeth_work_vert_fairy_source_MainView_mc_81_43_83_8_start:
+[ "/Users/oliverkoeth/work/vert-fairy/source/MainView.mc" 82 12 ]
+            symbol [ Lang %tmp.1 82 19 23 ];
+            %tmp.1 = getm $.Toybox.Lang;
+            symbol [ format %tmp.2 82 24 30 ];
+            %tmp.2 = getv function %tmp.1 :format;
+            %tmp.3 = "%.1f";
+            %tmp.4 = newa 1;
+            %tmp.5 = lgetv %distance;
+            symbol [ distance %tmp.5 82 40 48 ];
+            %tmp.6 = dup %tmp.4;
+            %tmp.7 = aputv %tmp.6 0 %tmp.5;
+            %tmp.8 = invoke %tmp.1 %tmp.2(%tmp.3, %tmp.7);
+            ret %tmp.8;
+_Users_oliverkoeth_work_vert_fairy_source_MainView_mc_81_43_83_8_stop:
+        }
+        [ @file = "/Users/oliverkoeth/work/vert-fairy/source/MainView.mc"; @line = 85; @symbol_functiondef = [onKey,85,17,22]; @symbol_param<0> = [key,85,23,26]; @symbol_param<1> = [state,85,28,33]; ]
+        function onKey(key, state) {
+_Users_oliverkoeth_work_vert_fairy_source_MainView_mc_85_35_99_8_start:
+[ "/Users/oliverkoeth/work/vert-fairy/source/MainView.mc" 86 12 ]
+_Users_oliverkoeth_work_vert_fairy_source_MainView_mc_86_12_88_12_if_stmt:
+            %tmp.1 = lgetv %state;
+            symbol [ state %tmp.1 86 16 21 ];
+            symbol [ WatchUi %tmp.2 86 25 32 ];
+            %tmp.2 = getm $.Toybox.WatchUi;
+            symbol [ KEY_DOWN %tmp.3 86 33 41 ];
+            %tmp.3 = getv %tmp.2 :KEY_DOWN;
+            %tmp.4 = ne %tmp.1 %tmp.3;
+            bf %tmp.4 @_Users_oliverkoeth_work_vert_fairy_source_MainView_mc_86_12_88_12_if_end;
+_Users_oliverkoeth_work_vert_fairy_source_MainView_mc_86_12_88_12_if_true:
+_Users_oliverkoeth_work_vert_fairy_source_MainView_mc_86_43_88_12_start:
+[ "/Users/oliverkoeth/work/vert-fairy/source/MainView.mc" 87 16 ]
+            %tmp.5 = false;
+            ret %tmp.5;
+_Users_oliverkoeth_work_vert_fairy_source_MainView_mc_86_43_88_12_stop:
+            goto @_Users_oliverkoeth_work_vert_fairy_source_MainView_mc_86_12_88_12_if_end;
+_Users_oliverkoeth_work_vert_fairy_source_MainView_mc_86_12_88_12_if_end:
+[ "/Users/oliverkoeth/work/vert-fairy/source/MainView.mc" 89 12 ]
+_Users_oliverkoeth_work_vert_fairy_source_MainView_mc_89_12_97_12_if_stmt:
+_Users_oliverkoeth_work_vert_fairy_source_MainView_mc_89_16_89_59_begin:
+            %tmp.6 = lgetv %key;
+            symbol [ key %tmp.6 89 16 19 ];
+            symbol [ WatchUi %tmp.7 89 23 30 ];
+            %tmp.7 = getm $.Toybox.WatchUi;
+            symbol [ KEY_START %tmp.8 89 31 40 ];
+            %tmp.8 = getv %tmp.7 :KEY_START;
+            %tmp.9 = eq %tmp.6 %tmp.8;
+            bt %tmp.9 @_Users_oliverkoeth_work_vert_fairy_source_MainView_mc_89_12_97_12_if_true;
+_Users_oliverkoeth_work_vert_fairy_source_MainView_mc_89_44_89_59_false:
+            %tmp.10 = lgetv %key;
+            symbol [ key %tmp.10 89 44 47 ];
+            symbol [ WatchUi %tmp.11 89 51 58 ];
+            %tmp.11 = getm $.Toybox.WatchUi;
+            symbol [ KEY_ENTER %tmp.12 89 59 68 ];
+            %tmp.12 = getv %tmp.11 :KEY_ENTER;
+            %tmp.13 = eq %tmp.10 %tmp.12;
+            push %tmp.13;
+_Users_oliverkoeth_work_vert_fairy_source_MainView_mc_89_44_89_59_end:
+            %tmp.14 = phi [%tmp.9 @_Users_oliverkoeth_work_vert_fairy_source_MainView_mc_89_16_89_59_begin] [%tmp.13 @_Users_oliverkoeth_work_vert_fairy_source_MainView_mc_89_44_89_59_false] [%tmp.14 @_Users_oliverkoeth_work_vert_fairy_source_MainView_mc_89_44_89_59_end];
+            bf %tmp.14 @_Users_oliverkoeth_work_vert_fairy_source_MainView_mc_89_12_97_12_if_end;
+_Users_oliverkoeth_work_vert_fairy_source_MainView_mc_89_12_97_12_if_true:
+_Users_oliverkoeth_work_vert_fairy_source_MainView_mc_89_70_97_12_start:
+[ "/Users/oliverkoeth/work/vert-fairy/source/MainView.mc" 90 16 ]
+_Users_oliverkoeth_work_vert_fairy_source_MainView_mc_90_16_94_16_if_stmt:
+            symbol [ _state %tmp.16 90 20 26 ];
+            %tmp.16 = getv ? :_state;
+            %tmp.18 = const :running;
+            symbol [ running %tmp.18 90 28 35 const ];
+            %tmp.19 = agetv %tmp.16 %tmp.18;
+            bf %tmp.19 @_Users_oliverkoeth_work_vert_fairy_source_MainView_mc_90_16_94_16_if_else_false;
+_Users_oliverkoeth_work_vert_fairy_source_MainView_mc_90_16_94_16_if_true:
+_Users_oliverkoeth_work_vert_fairy_source_MainView_mc_90_38_92_16_start:
+[ "/Users/oliverkoeth/work/vert-fairy/source/MainView.mc" 91 20 ]
+            %tmp.20 = self;
+            symbol [ stopActivity %tmp.21 91 20 32 ];
+            %tmp.21 = getv function %tmp.20 :stopActivity;
+            %tmp.22 = true;
+            invoke %tmp.20 %tmp.21(%tmp.22);
+_Users_oliverkoeth_work_vert_fairy_source_MainView_mc_90_38_92_16_stop:
+            goto @_Users_oliverkoeth_work_vert_fairy_source_MainView_mc_90_16_94_16_if_end;
+_Users_oliverkoeth_work_vert_fairy_source_MainView_mc_90_16_94_16_if_else_false:
+_Users_oliverkoeth_work_vert_fairy_source_MainView_mc_92_23_94_16_start:
+[ "/Users/oliverkoeth/work/vert-fairy/source/MainView.mc" 93 20 ]
+            %tmp.23 = self;
+            symbol [ startActivity %tmp.24 93 20 33 ];
+            %tmp.24 = getv function %tmp.23 :startActivity;
+            invoke %tmp.23 %tmp.24();
+_Users_oliverkoeth_work_vert_fairy_source_MainView_mc_92_23_94_16_stop:
+_Users_oliverkoeth_work_vert_fairy_source_MainView_mc_90_16_94_16_if_end:
+[ "/Users/oliverkoeth/work/vert-fairy/source/MainView.mc" 95 16 ]
+            symbol [ WatchUi %tmp.25 95 16 23 ];
+            %tmp.25 = getm $.Toybox.WatchUi;
+            symbol [ requestUpdate %tmp.26 95 24 37 ];
+            %tmp.26 = getv function %tmp.25 :requestUpdate;
+            invoke %tmp.25 %tmp.26();
+[ "/Users/oliverkoeth/work/vert-fairy/source/MainView.mc" 96 16 ]
+            %tmp.27 = true;
+            ret %tmp.27;
+_Users_oliverkoeth_work_vert_fairy_source_MainView_mc_89_70_97_12_stop:
+            goto @_Users_oliverkoeth_work_vert_fairy_source_MainView_mc_89_12_97_12_if_end;
+_Users_oliverkoeth_work_vert_fairy_source_MainView_mc_89_12_97_12_if_end:
+[ "/Users/oliverkoeth/work/vert-fairy/source/MainView.mc" 98 12 ]
+            %tmp.28 = false;
+            ret %tmp.28;
+_Users_oliverkoeth_work_vert_fairy_source_MainView_mc_85_35_99_8_stop:
+        }
+        [ @file = "/Users/oliverkoeth/work/vert-fairy/source/MainView.mc"; @line = 101; @symbol_functiondef = [startActivity,101,17,30]; ]
+        function startActivity() {
+_Users_oliverkoeth_work_vert_fairy_source_MainView_mc_101_33_118_8_start:
+[ "/Users/oliverkoeth/work/vert-fairy/source/MainView.mc" 102 12 ]
+_Users_oliverkoeth_work_vert_fairy_source_MainView_mc_102_12_104_12_if_stmt:
+            symbol [ _hasAccelerometer %tmp.2 102 17 34 ];
+            %tmp.2 = getv ? :_hasAccelerometer;
+            %tmp.3 = not %tmp.2;
+            bf %tmp.3 @_Users_oliverkoeth_work_vert_fairy_source_MainView_mc_102_12_104_12_if_end;
+_Users_oliverkoeth_work_vert_fairy_source_MainView_mc_102_12_104_12_if_true:
+_Users_oliverkoeth_work_vert_fairy_source_MainView_mc_102_36_104_12_start:
+[ "/Users/oliverkoeth/work/vert-fairy/source/MainView.mc" 103 16 ]
+            ret ?;
+_Users_oliverkoeth_work_vert_fairy_source_MainView_mc_102_36_104_12_stop:
+            goto @_Users_oliverkoeth_work_vert_fairy_source_MainView_mc_102_12_104_12_if_end;
+_Users_oliverkoeth_work_vert_fairy_source_MainView_mc_102_12_104_12_if_end:
+[ "/Users/oliverkoeth/work/vert-fairy/source/MainView.mc" 105 12 ]
+_Users_oliverkoeth_work_vert_fairy_source_MainView_mc_105_12_107_12_if_stmt:
+            symbol [ _state %tmp.5 105 16 22 ];
+            %tmp.5 = getv ? :_state;
+            %tmp.7 = const :running;
+            symbol [ running %tmp.7 105 24 31 const ];
+            %tmp.8 = agetv %tmp.5 %tmp.7;
+            bf %tmp.8 @_Users_oliverkoeth_work_vert_fairy_source_MainView_mc_105_12_107_12_if_end;
+_Users_oliverkoeth_work_vert_fairy_source_MainView_mc_105_12_107_12_if_true:
+_Users_oliverkoeth_work_vert_fairy_source_MainView_mc_105_34_107_12_start:
+[ "/Users/oliverkoeth/work/vert-fairy/source/MainView.mc" 106 16 ]
+            ret ?;
+_Users_oliverkoeth_work_vert_fairy_source_MainView_mc_105_34_107_12_stop:
+            goto @_Users_oliverkoeth_work_vert_fairy_source_MainView_mc_105_12_107_12_if_end;
+_Users_oliverkoeth_work_vert_fairy_source_MainView_mc_105_12_107_12_if_end:
+[ "/Users/oliverkoeth/work/vert-fairy/source/MainView.mc" 108 12 ]
+            symbol [ _state %tmp.9 108 12 18 ];
+            %tmp.9 = getv self :_state;
+            %tmp.10 = 0;
+            %tmp.12 = const :steps;
+            symbol [ steps %tmp.12 108 20 25 const ];
+            aputv %tmp.9 %tmp.12 %tmp.10;
+[ "/Users/oliverkoeth/work/vert-fairy/source/MainView.mc" 109 12 ]
+            symbol [ _state %tmp.13 109 12 18 ];
+            %tmp.13 = getv self :_state;
+            %tmp.14 = 0.0;
+            %tmp.16 = const :distance;
+            symbol [ distance %tmp.16 109 20 28 const ];
+            aputv %tmp.13 %tmp.16 %tmp.14;
+[ "/Users/oliverkoeth/work/vert-fairy/source/MainView.mc" 110 12 ]
+            symbol [ _state %tmp.17 110 12 18 ];
+            %tmp.17 = getv self :_state;
+            %tmp.18 = null;
+            %tmp.20 = const :sessionError;
+            symbol [ sessionError %tmp.20 110 20 32 const ];
+            aputv %tmp.17 %tmp.20 %tmp.18;
+[ "/Users/oliverkoeth/work/vert-fairy/source/MainView.mc" 111 12 ]
+            symbol [ _detector %tmp.22 111 12 21 ];
+            %tmp.22 = getv ? :_detector;
+            symbol [ reset %tmp.23 111 22 27 ];
+            %tmp.23 = getv function %tmp.22 :reset;
+            invoke %tmp.22 %tmp.23();
+[ "/Users/oliverkoeth/work/vert-fairy/source/MainView.mc" 112 12 ]
+            symbol [ _state %tmp.24 112 12 18 ];
+            %tmp.24 = getv self :_state;
+            %tmp.25 = true;
+            %tmp.27 = const :running;
+            symbol [ running %tmp.27 112 20 27 const ];
+            aputv %tmp.24 %tmp.27 %tmp.25;
+[ "/Users/oliverkoeth/work/vert-fairy/source/MainView.mc" 113 12 ]
+            [ "_Users_oliverkoeth_work_vert_fairy_source_MainView_mc_101_33_118_8_start" "_Users_oliverkoeth_work_vert_fairy_source_MainView_mc_101_33_118_8_stop" ]
+            %started.1 = local;
+            symbol [ started %started.1 113 16 23 ];
+_Users_oliverkoeth_work_vert_fairy_source_MainView_mc_113_26_113_85_begin:
+            symbol [ _sessionService %tmp.29 113 26 41 ];
+            %tmp.29 = getv ? :_sessionService;
+            %tmp.30 = null;
+            %tmp.31 = ne %tmp.29 %tmp.30;
+            bf %tmp.31 @_Users_oliverkoeth_work_vert_fairy_source_MainView_mc_113_26_113_85_else_false;
+_Users_oliverkoeth_work_vert_fairy_source_MainView_mc_113_26_113_85_true:
+            symbol [ _sessionService %tmp.33 113 52 67 ];
+            %tmp.33 = getv ? :_sessionService;
+            %tmp.34 = as %tmp.33 { (!Null) };
+            symbol [ startSession %tmp.35 113 68 80 ];
+            %tmp.35 = getv function %tmp.34 :startSession;
+            %tmp.36 = invoke %tmp.34 %tmp.35();
+            push %tmp.36;
+            goto @_Users_oliverkoeth_work_vert_fairy_source_MainView_mc_113_26_113_85_end;
+_Users_oliverkoeth_work_vert_fairy_source_MainView_mc_113_26_113_85_else_false:
+            %tmp.37 = true;
+            push %tmp.37;
+_Users_oliverkoeth_work_vert_fairy_source_MainView_mc_113_26_113_85_end:
+            %tmp.38 = phi [%tmp.31 @_Users_oliverkoeth_work_vert_fairy_source_MainView_mc_113_26_113_85_begin] [%tmp.36 @_Users_oliverkoeth_work_vert_fairy_source_MainView_mc_113_26_113_85_true] [%tmp.37 @_Users_oliverkoeth_work_vert_fairy_source_MainView_mc_113_26_113_85_else_false] [%tmp.38 @_Users_oliverkoeth_work_vert_fairy_source_MainView_mc_113_26_113_85_end];
+            lputv %started.1 %tmp.38;
+            symbol [ started %started.1 113 16 23 ];
+[ "/Users/oliverkoeth/work/vert-fairy/source/MainView.mc" 114 12 ]
+_Users_oliverkoeth_work_vert_fairy_source_MainView_mc_114_12_116_12_if_stmt:
+_Users_oliverkoeth_work_vert_fairy_source_MainView_mc_114_16_114_47_begin:
+            %tmp.39 = lgetv %started.1;
+            symbol [ started %tmp.39 114 17 24 ];
+            %tmp.40 = not %tmp.39;
+            bf %tmp.40 @_Users_oliverkoeth_work_vert_fairy_source_MainView_mc_114_12_116_12_if_end;
+_Users_oliverkoeth_work_vert_fairy_source_MainView_mc_114_28_114_47_true:
+            symbol [ _sessionService %tmp.42 114 28 43 ];
+            %tmp.42 = getv ? :_sessionService;
+            %tmp.43 = null;
+            %tmp.44 = ne %tmp.42 %tmp.43;
+            push %tmp.44;
+_Users_oliverkoeth_work_vert_fairy_source_MainView_mc_114_28_114_47_end:
+            %tmp.45 = phi [%tmp.40 @_Users_oliverkoeth_work_vert_fairy_source_MainView_mc_114_16_114_47_begin] [%tmp.44 @_Users_oliverkoeth_work_vert_fairy_source_MainView_mc_114_28_114_47_true] [%tmp.45 @_Users_oliverkoeth_work_vert_fairy_source_MainView_mc_114_28_114_47_end];
+            bf %tmp.45 @_Users_oliverkoeth_work_vert_fairy_source_MainView_mc_114_12_116_12_if_end;
+_Users_oliverkoeth_work_vert_fairy_source_MainView_mc_114_12_116_12_if_true:
+_Users_oliverkoeth_work_vert_fairy_source_MainView_mc_114_53_116_12_start:
+[ "/Users/oliverkoeth/work/vert-fairy/source/MainView.mc" 115 16 ]
+            symbol [ _state %tmp.46 115 16 22 ];
+            %tmp.46 = getv self :_state;
+            symbol [ _sessionService %tmp.48 115 40 55 ];
+            %tmp.48 = getv ? :_sessionService;
+            %tmp.49 = as %tmp.48 { (!Null) };
+            symbol [ getErrorMessage %tmp.50 115 56 71 ];
+            %tmp.50 = getv function %tmp.49 :getErrorMessage;
+            %tmp.51 = invoke %tmp.49 %tmp.50();
+            %tmp.53 = const :sessionError;
+            symbol [ sessionError %tmp.53 115 24 36 const ];
+            aputv %tmp.46 %tmp.53 %tmp.51;
+_Users_oliverkoeth_work_vert_fairy_source_MainView_mc_114_53_116_12_stop:
+            goto @_Users_oliverkoeth_work_vert_fairy_source_MainView_mc_114_12_116_12_if_end;
+_Users_oliverkoeth_work_vert_fairy_source_MainView_mc_114_12_116_12_if_end:
+[ "/Users/oliverkoeth/work/vert-fairy/source/MainView.mc" 117 12 ]
+            %tmp.54 = self;
+            symbol [ _registerAccelerometer %tmp.55 117 12 34 ];
+            %tmp.55 = getv function %tmp.54 :_registerAccelerometer;
+            invoke %tmp.54 %tmp.55();
+_Users_oliverkoeth_work_vert_fairy_source_MainView_mc_101_33_118_8_stop:
+        }
+        [ @file = "/Users/oliverkoeth/work/vert-fairy/source/MainView.mc"; @line = 120; @symbol_functiondef = [stopActivity,120,17,29]; @symbol_param<0> = [save,120,30,34]; ]
+        function stopActivity(save) {
+_Users_oliverkoeth_work_vert_fairy_source_MainView_mc_120_36_131_8_start:
+[ "/Users/oliverkoeth/work/vert-fairy/source/MainView.mc" 121 12 ]
+_Users_oliverkoeth_work_vert_fairy_source_MainView_mc_121_12_123_12_if_stmt:
+            symbol [ _state %tmp.2 121 17 23 ];
+            %tmp.2 = getv ? :_state;
+            %tmp.4 = const :running;
+            symbol [ running %tmp.4 121 25 32 const ];
+            %tmp.5 = agetv %tmp.2 %tmp.4;
+            %tmp.6 = not %tmp.5;
+            bf %tmp.6 @_Users_oliverkoeth_work_vert_fairy_source_MainView_mc_121_12_123_12_if_end;
+_Users_oliverkoeth_work_vert_fairy_source_MainView_mc_121_12_123_12_if_true:
+_Users_oliverkoeth_work_vert_fairy_source_MainView_mc_121_35_123_12_start:
+[ "/Users/oliverkoeth/work/vert-fairy/source/MainView.mc" 122 16 ]
+            ret ?;
+_Users_oliverkoeth_work_vert_fairy_source_MainView_mc_121_35_123_12_stop:
+            goto @_Users_oliverkoeth_work_vert_fairy_source_MainView_mc_121_12_123_12_if_end;
+_Users_oliverkoeth_work_vert_fairy_source_MainView_mc_121_12_123_12_if_end:
+[ "/Users/oliverkoeth/work/vert-fairy/source/MainView.mc" 124 12 ]
+            symbol [ _state %tmp.7 124 12 18 ];
+            %tmp.7 = getv self :_state;
+            %tmp.8 = false;
+            %tmp.10 = const :running;
+            symbol [ running %tmp.10 124 20 27 const ];
+            aputv %tmp.7 %tmp.10 %tmp.8;
+[ "/Users/oliverkoeth/work/vert-fairy/source/MainView.mc" 125 12 ]
+            %tmp.11 = self;
+            symbol [ _unregisterAccelerometer %tmp.12 125 12 36 ];
+            %tmp.12 = getv function %tmp.11 :_unregisterAccelerometer;
+            invoke %tmp.11 %tmp.12();
+[ "/Users/oliverkoeth/work/vert-fairy/source/MainView.mc" 126 12 ]
+_Users_oliverkoeth_work_vert_fairy_source_MainView_mc_126_12_130_12_if_stmt:
+            symbol [ _sessionService %tmp.14 126 16 31 ];
+            %tmp.14 = getv ? :_sessionService;
+            %tmp.15 = null;
+            %tmp.16 = ne %tmp.14 %tmp.15;
+            bf %tmp.16 @_Users_oliverkoeth_work_vert_fairy_source_MainView_mc_126_12_130_12_if_end;
+_Users_oliverkoeth_work_vert_fairy_source_MainView_mc_126_12_130_12_if_true:
+_Users_oliverkoeth_work_vert_fairy_source_MainView_mc_126_41_130_12_start:
+[ "/Users/oliverkoeth/work/vert-fairy/source/MainView.mc" 127 16 ]
+            symbol [ _sessionService %tmp.18 127 16 31 ];
+            %tmp.18 = getv ? :_sessionService;
+            %tmp.19 = as %tmp.18 { (!Null) };
+            symbol [ updateMetrics %tmp.20 127 32 45 ];
+            %tmp.20 = getv function %tmp.19 :updateMetrics;
+            symbol [ _state %tmp.22 127 46 52 ];
+            %tmp.22 = getv ? :_state;
+            %tmp.24 = const :steps;
+            symbol [ steps %tmp.24 127 54 59 const ];
+            %tmp.25 = agetv %tmp.22 %tmp.24;
+            symbol [ _state %tmp.27 127 62 68 ];
+            %tmp.27 = getv ? :_state;
+            %tmp.29 = const :distance;
+            symbol [ distance %tmp.29 127 70 78 const ];
+            %tmp.30 = agetv %tmp.27 %tmp.29;
+            invoke %tmp.19 %tmp.20(%tmp.25, %tmp.30);
+[ "/Users/oliverkoeth/work/vert-fairy/source/MainView.mc" 128 16 ]
+            symbol [ _sessionService %tmp.32 128 16 31 ];
+            %tmp.32 = getv ? :_sessionService;
+            symbol [ stopSession %tmp.33 128 32 43 ];
+            %tmp.33 = getv function %tmp.32 :stopSession;
+            %tmp.34 = lgetv %save;
+            symbol [ save %tmp.34 128 44 48 ];
+            invoke %tmp.32 %tmp.33(%tmp.34);
+[ "/Users/oliverkoeth/work/vert-fairy/source/MainView.mc" 129 16 ]
+            symbol [ _state %tmp.35 129 16 22 ];
+            %tmp.35 = getv self :_state;
+            symbol [ _sessionService %tmp.37 129 40 55 ];
+            %tmp.37 = getv ? :_sessionService;
+            symbol [ getErrorMessage %tmp.38 129 56 71 ];
+            %tmp.38 = getv function %tmp.37 :getErrorMessage;
+            %tmp.39 = invoke %tmp.37 %tmp.38();
+            %tmp.41 = const :sessionError;
+            symbol [ sessionError %tmp.41 129 24 36 const ];
+            aputv %tmp.35 %tmp.41 %tmp.39;
+_Users_oliverkoeth_work_vert_fairy_source_MainView_mc_126_41_130_12_stop:
+            goto @_Users_oliverkoeth_work_vert_fairy_source_MainView_mc_126_12_130_12_if_end;
+_Users_oliverkoeth_work_vert_fairy_source_MainView_mc_126_12_130_12_if_end:
+_Users_oliverkoeth_work_vert_fairy_source_MainView_mc_120_36_131_8_stop:
+        }
+        [ @file = "/Users/oliverkoeth/work/vert-fairy/source/MainView.mc"; @line = 133; @symbol_functiondef = [_registerAccelerometer,133,17,39]; ]
+        function _registerAccelerometer() {
+_Users_oliverkoeth_work_vert_fairy_source_MainView_mc_133_42_145_8_start:
+[ "/Users/oliverkoeth/work/vert-fairy/source/MainView.mc" 134 12 ]
+_Users_oliverkoeth_work_vert_fairy_source_MainView_mc_134_12_136_12_if_stmt:
+            symbol [ _accelActive %tmp.2 134 16 28 ];
+            %tmp.2 = getv ? :_accelActive;
+            bf %tmp.2 @_Users_oliverkoeth_work_vert_fairy_source_MainView_mc_134_12_136_12_if_end;
+_Users_oliverkoeth_work_vert_fairy_source_MainView_mc_134_12_136_12_if_true:
+_Users_oliverkoeth_work_vert_fairy_source_MainView_mc_134_30_136_12_start:
+[ "/Users/oliverkoeth/work/vert-fairy/source/MainView.mc" 135 16 ]
+            ret ?;
+_Users_oliverkoeth_work_vert_fairy_source_MainView_mc_134_30_136_12_stop:
+            goto @_Users_oliverkoeth_work_vert_fairy_source_MainView_mc_134_12_136_12_if_end;
+_Users_oliverkoeth_work_vert_fairy_source_MainView_mc_134_12_136_12_if_end:
+[ "/Users/oliverkoeth/work/vert-fairy/source/MainView.mc" 137 12 ]
+_Users_oliverkoeth_work_vert_fairy_source_MainView_mc_137_12_139_12_if_stmt:
+            symbol [ _hasAccelerometer %tmp.4 137 17 34 ];
+            %tmp.4 = getv ? :_hasAccelerometer;
+            %tmp.5 = not %tmp.4;
+            bf %tmp.5 @_Users_oliverkoeth_work_vert_fairy_source_MainView_mc_137_12_139_12_if_end;
+_Users_oliverkoeth_work_vert_fairy_source_MainView_mc_137_12_139_12_if_true:
+_Users_oliverkoeth_work_vert_fairy_source_MainView_mc_137_36_139_12_start:
+[ "/Users/oliverkoeth/work/vert-fairy/source/MainView.mc" 138 16 ]
+            ret ?;
+_Users_oliverkoeth_work_vert_fairy_source_MainView_mc_137_36_139_12_stop:
+            goto @_Users_oliverkoeth_work_vert_fairy_source_MainView_mc_137_12_139_12_if_end;
+_Users_oliverkoeth_work_vert_fairy_source_MainView_mc_137_12_139_12_if_end:
+[ "/Users/oliverkoeth/work/vert-fairy/source/MainView.mc" 140 12 ]
+            [ "_Users_oliverkoeth_work_vert_fairy_source_MainView_mc_133_42_145_8_start" "_Users_oliverkoeth_work_vert_fairy_source_MainView_mc_133_42_145_8_stop" ]
+            %options.1 = local;
+            symbol [ options %options.1 140 16 23 ];
+            %tmp.6 = newd 1;
+            %tmp.8 = const :period;
+            symbol [ period %tmp.8 140 29 35 const ];
+            symbol [ SAMPLE_PERIOD_MS %tmp.10 140 39 55 ];
+            %tmp.10 = getv ? :SAMPLE_PERIOD_MS;
+            %tmp.11 = dup %tmp.6;
+            %tmp.12 = aputv %tmp.11 %tmp.8 %tmp.10;
+            lputv %options.1 %tmp.12;
+            symbol [ options %options.1 140 16 23 ];
+[ "/Users/oliverkoeth/work/vert-fairy/source/MainView.mc" 141 12 ]
+_Users_oliverkoeth_work_vert_fairy_source_MainView_mc_141_12_144_12_if_stmt:
+            symbol [ Sensor %tmp.13 141 16 22 ];
+            %tmp.13 = getm $.Toybox.Sensor;
+            symbol [ respondsTo %tmp.14 141 23 33 ];
+            %tmp.14 = getv function %tmp.13 :respondsTo;
+            %tmp.16 = const :setAccelerometerListener;
+            symbol [ setAccelerometerListener %tmp.16 141 35 59 const ];
+            %tmp.17 = invoke %tmp.13 %tmp.14(%tmp.16);
+            bf %tmp.17 @_Users_oliverkoeth_work_vert_fairy_source_MainView_mc_141_12_144_12_if_end;
+_Users_oliverkoeth_work_vert_fairy_source_MainView_mc_141_12_144_12_if_true:
+_Users_oliverkoeth_work_vert_fairy_source_MainView_mc_141_62_144_12_start:
+[ "/Users/oliverkoeth/work/vert-fairy/source/MainView.mc" 142 16 ]
+            symbol [ Sensor %tmp.18 142 16 22 ];
+            %tmp.18 = getm $.Toybox.Sensor;
+            symbol [ setAccelerometerListener %tmp.19 142 23 47 ];
+            %tmp.19 = getv function %tmp.18 :setAccelerometerListener;
+            %tmp.20 = self;
+            symbol [ method %tmp.21 142 48 54 ];
+            %tmp.21 = getv function %tmp.20 :method;
+            %tmp.23 = const :onAccelData;
+            symbol [ onAccelData %tmp.23 142 56 67 const ];
+            %tmp.24 = invoke %tmp.20 %tmp.21(%tmp.23);
+            %tmp.25 = lgetv %options.1;
+            symbol [ options %tmp.25 142 70 77 ];
+            invoke %tmp.18 %tmp.19(%tmp.24, %tmp.25);
+[ "/Users/oliverkoeth/work/vert-fairy/source/MainView.mc" 143 16 ]
+            %tmp.26 = true;
+            symbol [ _accelActive ? 143 16 28 ];
+            putv self :_accelActive %tmp.26;
+_Users_oliverkoeth_work_vert_fairy_source_MainView_mc_141_62_144_12_stop:
+            goto @_Users_oliverkoeth_work_vert_fairy_source_MainView_mc_141_12_144_12_if_end;
+_Users_oliverkoeth_work_vert_fairy_source_MainView_mc_141_12_144_12_if_end:
+_Users_oliverkoeth_work_vert_fairy_source_MainView_mc_133_42_145_8_stop:
+        }
+        [ @file = "/Users/oliverkoeth/work/vert-fairy/source/MainView.mc"; @line = 147; @symbol_functiondef = [_unregisterAccelerometer,147,17,41]; ]
+        function _unregisterAccelerometer() {
+_Users_oliverkoeth_work_vert_fairy_source_MainView_mc_147_44_155_8_start:
+[ "/Users/oliverkoeth/work/vert-fairy/source/MainView.mc" 148 12 ]
+_Users_oliverkoeth_work_vert_fairy_source_MainView_mc_148_12_150_12_if_stmt:
+            symbol [ _accelActive %tmp.2 148 17 29 ];
+            %tmp.2 = getv ? :_accelActive;
+            %tmp.3 = not %tmp.2;
+            bf %tmp.3 @_Users_oliverkoeth_work_vert_fairy_source_MainView_mc_148_12_150_12_if_end;
+_Users_oliverkoeth_work_vert_fairy_source_MainView_mc_148_12_150_12_if_true:
+_Users_oliverkoeth_work_vert_fairy_source_MainView_mc_148_31_150_12_start:
+[ "/Users/oliverkoeth/work/vert-fairy/source/MainView.mc" 149 16 ]
+            ret ?;
+_Users_oliverkoeth_work_vert_fairy_source_MainView_mc_148_31_150_12_stop:
+            goto @_Users_oliverkoeth_work_vert_fairy_source_MainView_mc_148_12_150_12_if_end;
+_Users_oliverkoeth_work_vert_fairy_source_MainView_mc_148_12_150_12_if_end:
+[ "/Users/oliverkoeth/work/vert-fairy/source/MainView.mc" 151 12 ]
+_Users_oliverkoeth_work_vert_fairy_source_MainView_mc_151_12_153_12_if_stmt:
+            symbol [ Sensor %tmp.4 151 16 22 ];
+            %tmp.4 = getm $.Toybox.Sensor;
+            symbol [ respondsTo %tmp.5 151 23 33 ];
+            %tmp.5 = getv function %tmp.4 :respondsTo;
+            %tmp.7 = const :releaseAccelerometerListener;
+            symbol [ releaseAccelerometerListener %tmp.7 151 35 63 const ];
+            %tmp.8 = invoke %tmp.4 %tmp.5(%tmp.7);
+            bf %tmp.8 @_Users_oliverkoeth_work_vert_fairy_source_MainView_mc_151_12_153_12_if_end;
+_Users_oliverkoeth_work_vert_fairy_source_MainView_mc_151_12_153_12_if_true:
+_Users_oliverkoeth_work_vert_fairy_source_MainView_mc_151_66_153_12_start:
+[ "/Users/oliverkoeth/work/vert-fairy/source/MainView.mc" 152 16 ]
+            symbol [ Sensor %tmp.9 152 16 22 ];
+            %tmp.9 = getm $.Toybox.Sensor;
+            symbol [ releaseAccelerometerListener %tmp.10 152 23 51 ];
+            %tmp.10 = getv function %tmp.9 :releaseAccelerometerListener;
+            invoke %tmp.9 %tmp.10();
+_Users_oliverkoeth_work_vert_fairy_source_MainView_mc_151_66_153_12_stop:
+            goto @_Users_oliverkoeth_work_vert_fairy_source_MainView_mc_151_12_153_12_if_end;
+_Users_oliverkoeth_work_vert_fairy_source_MainView_mc_151_12_153_12_if_end:
+[ "/Users/oliverkoeth/work/vert-fairy/source/MainView.mc" 154 12 ]
+            %tmp.11 = false;
+            symbol [ _accelActive ? 154 12 24 ];
+            putv self :_accelActive %tmp.11;
+_Users_oliverkoeth_work_vert_fairy_source_MainView_mc_147_44_155_8_stop:
+        }
+        [ @file = "/Users/oliverkoeth/work/vert-fairy/source/MainView.mc"; @line = 157; @symbol_functiondef = [onAccelData,157,17,28]; @symbol_param<0> = [samples,157,29,36]; ]
+        function onAccelData(samples) {
+_Users_oliverkoeth_work_vert_fairy_source_MainView_mc_157_38_170_8_start:
+[ "/Users/oliverkoeth/work/vert-fairy/source/MainView.mc" 158 12 ]
+            [ "_Users_oliverkoeth_work_vert_fairy_source_MainView_mc_157_38_170_8_start" "_Users_oliverkoeth_work_vert_fairy_source_MainView_mc_157_38_170_8_stop" ]
+            %newSteps.1 = local;
+            symbol [ newSteps %newSteps.1 158 16 24 ];
+            symbol [ _detector %tmp.2 158 27 36 ];
+            %tmp.2 = getv ? :_detector;
+            symbol [ addSamples %tmp.3 158 37 47 ];
+            %tmp.3 = getv function %tmp.2 :addSamples;
+            %tmp.4 = lgetv %samples;
+            symbol [ samples %tmp.4 158 48 55 ];
+            %tmp.5 = invoke %tmp.2 %tmp.3(%tmp.4);
+            lputv %newSteps.1 %tmp.5;
+            symbol [ newSteps %newSteps.1 158 16 24 ];
+[ "/Users/oliverkoeth/work/vert-fairy/source/MainView.mc" 159 12 ]
+_Users_oliverkoeth_work_vert_fairy_source_MainView_mc_159_12_165_12_if_stmt:
+            %tmp.6 = lgetv %newSteps.1;
+            symbol [ newSteps %tmp.6 159 16 24 ];
+            %tmp.7 = 0;
+            %tmp.8 = gt %tmp.6 %tmp.7;
+            bf %tmp.8 @_Users_oliverkoeth_work_vert_fairy_source_MainView_mc_159_12_165_12_if_end;
+_Users_oliverkoeth_work_vert_fairy_source_MainView_mc_159_12_165_12_if_true:
+_Users_oliverkoeth_work_vert_fairy_source_MainView_mc_159_30_165_12_start:
+[ "/Users/oliverkoeth/work/vert-fairy/source/MainView.mc" 160 16 ]
+            symbol [ _state %tmp.9 160 16 22 ];
+            %tmp.9 = getv self :_state;
+            symbol [ _state %tmp.10 160 16 22 ];
+            %tmp.10 = getv self :_state;
+            %tmp.12 = const :steps;
+            symbol [ steps %tmp.12 160 24 29 const ];
+            %tmp.13 = agetv %tmp.10 %tmp.12;
+            %tmp.14 = lgetv %newSteps.1;
+            symbol [ newSteps %tmp.14 160 34 42 ];
+            %tmp.15 = add %tmp.13 %tmp.14;
+            %tmp.17 = const :steps;
+            symbol [ steps %tmp.17 160 24 29 const ];
+            aputv %tmp.9 %tmp.17 dup %tmp.15;
+[ "/Users/oliverkoeth/work/vert-fairy/source/MainView.mc" 161 16 ]
+            symbol [ _state %tmp.18 161 16 22 ];
+            %tmp.18 = getv self :_state;
+            symbol [ _state %tmp.20 161 36 42 ];
+            %tmp.20 = getv ? :_state;
+            %tmp.22 = const :steps;
+            symbol [ steps %tmp.22 161 44 49 const ];
+            %tmp.23 = agetv %tmp.20 %tmp.22;
+            symbol [ _state %tmp.25 161 53 59 ];
+            %tmp.25 = getv ? :_state;
+            %tmp.27 = const :stepLength;
+            symbol [ stepLength %tmp.27 161 61 71 const ];
+            %tmp.28 = agetv %tmp.25 %tmp.27;
+            %tmp.29 = mul %tmp.23 %tmp.28;
+            %tmp.31 = const :distance;
+            symbol [ distance %tmp.31 161 24 32 const ];
+            aputv %tmp.18 %tmp.31 %tmp.29;
+[ "/Users/oliverkoeth/work/vert-fairy/source/MainView.mc" 162 16 ]
+_Users_oliverkoeth_work_vert_fairy_source_MainView_mc_162_16_164_16_if_stmt:
+            symbol [ _sessionService %tmp.33 162 20 35 ];
+            %tmp.33 = getv ? :_sessionService;
+            %tmp.34 = null;
+            %tmp.35 = ne %tmp.33 %tmp.34;
+            bf %tmp.35 @_Users_oliverkoeth_work_vert_fairy_source_MainView_mc_162_16_164_16_if_end;
+_Users_oliverkoeth_work_vert_fairy_source_MainView_mc_162_16_164_16_if_true:
+_Users_oliverkoeth_work_vert_fairy_source_MainView_mc_162_45_164_16_start:
+[ "/Users/oliverkoeth/work/vert-fairy/source/MainView.mc" 163 20 ]
+            symbol [ _sessionService %tmp.37 163 20 35 ];
+            %tmp.37 = getv ? :_sessionService;
+            %tmp.38 = as %tmp.37 { (!Null) };
+            symbol [ updateMetrics %tmp.39 163 36 49 ];
+            %tmp.39 = getv function %tmp.38 :updateMetrics;
+            symbol [ _state %tmp.41 163 50 56 ];
+            %tmp.41 = getv ? :_state;
+            %tmp.43 = const :steps;
+            symbol [ steps %tmp.43 163 58 63 const ];
+            %tmp.44 = agetv %tmp.41 %tmp.43;
+            symbol [ _state %tmp.46 163 66 72 ];
+            %tmp.46 = getv ? :_state;
+            %tmp.48 = const :distance;
+            symbol [ distance %tmp.48 163 74 82 const ];
+            %tmp.49 = agetv %tmp.46 %tmp.48;
+            invoke %tmp.38 %tmp.39(%tmp.44, %tmp.49);
+_Users_oliverkoeth_work_vert_fairy_source_MainView_mc_162_45_164_16_stop:
+            goto @_Users_oliverkoeth_work_vert_fairy_source_MainView_mc_162_16_164_16_if_end;
+_Users_oliverkoeth_work_vert_fairy_source_MainView_mc_162_16_164_16_if_end:
+_Users_oliverkoeth_work_vert_fairy_source_MainView_mc_159_30_165_12_stop:
+            goto @_Users_oliverkoeth_work_vert_fairy_source_MainView_mc_159_12_165_12_if_end;
+_Users_oliverkoeth_work_vert_fairy_source_MainView_mc_159_12_165_12_if_end:
+[ "/Users/oliverkoeth/work/vert-fairy/source/MainView.mc" 166 12 ]
+            [ "_Users_oliverkoeth_work_vert_fairy_source_MainView_mc_157_38_170_8_start" "_Users_oliverkoeth_work_vert_fairy_source_MainView_mc_157_38_170_8_stop" ]
+            %now.2 = local;
+            symbol [ now %now.2 166 16 19 ];
+            symbol [ System %tmp.50 166 22 28 ];
+            %tmp.50 = getm $.Toybox.System;
+            symbol [ getTicks %tmp.51 166 29 37 ];
+            %tmp.51 = getv function %tmp.50 :getTicks;
+            %tmp.52 = invoke %tmp.50 %tmp.51();
+            lputv %now.2 %tmp.52;
+            symbol [ now %now.2 166 16 19 ];
+[ "/Users/oliverkoeth/work/vert-fairy/source/MainView.mc" 167 12 ]
+_Users_oliverkoeth_work_vert_fairy_source_MainView_mc_167_12_169_12_if_stmt:
+            %tmp.53 = lgetv %now.2;
+            symbol [ now %tmp.53 167 16 19 ];
+            symbol [ _lastUiUpdate %tmp.55 167 22 35 ];
+            %tmp.55 = getv ? :_lastUiUpdate;
+            %tmp.56 = sub %tmp.53 %tmp.55;
+            %tmp.57 = 900;
+            %tmp.58 = gte %tmp.56 %tmp.57;
+            bf %tmp.58 @_Users_oliverkoeth_work_vert_fairy_source_MainView_mc_167_12_169_12_if_end;
+_Users_oliverkoeth_work_vert_fairy_source_MainView_mc_167_12_169_12_if_true:
+_Users_oliverkoeth_work_vert_fairy_source_MainView_mc_167_44_169_12_start:
+[ "/Users/oliverkoeth/work/vert-fairy/source/MainView.mc" 168 16 ]
+            symbol [ WatchUi %tmp.59 168 16 23 ];
+            %tmp.59 = getm $.Toybox.WatchUi;
+            symbol [ requestUpdate %tmp.60 168 24 37 ];
+            %tmp.60 = getv function %tmp.59 :requestUpdate;
+            invoke %tmp.59 %tmp.60();
+_Users_oliverkoeth_work_vert_fairy_source_MainView_mc_167_44_169_12_stop:
+            goto @_Users_oliverkoeth_work_vert_fairy_source_MainView_mc_167_12_169_12_if_end;
+_Users_oliverkoeth_work_vert_fairy_source_MainView_mc_167_12_169_12_if_end:
+_Users_oliverkoeth_work_vert_fairy_source_MainView_mc_157_38_170_8_stop:
+        }
+        [ @file = "/Users/oliverkoeth/work/vert-fairy/source/MainView.mc"; @line = 172; @symbol_functiondef = [onAppBackground,172,17,32]; ]
+        function onAppBackground() {
+_Users_oliverkoeth_work_vert_fairy_source_MainView_mc_172_35_174_8_start:
+[ "/Users/oliverkoeth/work/vert-fairy/source/MainView.mc" 173 12 ]
+            %tmp.1 = self;
+            symbol [ _unregisterAccelerometer %tmp.2 173 12 36 ];
+            %tmp.2 = getv function %tmp.1 :_unregisterAccelerometer;
+            invoke %tmp.1 %tmp.2();
+_Users_oliverkoeth_work_vert_fairy_source_MainView_mc_172_35_174_8_stop:
+        }
+        [ @file = "/Users/oliverkoeth/work/vert-fairy/source/MainView.mc"; @line = 176; @symbol_functiondef = [onAppResume,176,17,28]; ]
+        function onAppResume() {
+_Users_oliverkoeth_work_vert_fairy_source_MainView_mc_176_31_180_8_start:
+[ "/Users/oliverkoeth/work/vert-fairy/source/MainView.mc" 177 12 ]
+_Users_oliverkoeth_work_vert_fairy_source_MainView_mc_177_12_179_12_if_stmt:
+            symbol [ _state %tmp.2 177 16 22 ];
+            %tmp.2 = getv ? :_state;
+            %tmp.4 = const :running;
+            symbol [ running %tmp.4 177 24 31 const ];
+            %tmp.5 = agetv %tmp.2 %tmp.4;
+            bf %tmp.5 @_Users_oliverkoeth_work_vert_fairy_source_MainView_mc_177_12_179_12_if_end;
+_Users_oliverkoeth_work_vert_fairy_source_MainView_mc_177_12_179_12_if_true:
+_Users_oliverkoeth_work_vert_fairy_source_MainView_mc_177_34_179_12_start:
+[ "/Users/oliverkoeth/work/vert-fairy/source/MainView.mc" 178 16 ]
+            %tmp.6 = self;
+            symbol [ _registerAccelerometer %tmp.7 178 16 38 ];
+            %tmp.7 = getv function %tmp.6 :_registerAccelerometer;
+            invoke %tmp.6 %tmp.7();
+_Users_oliverkoeth_work_vert_fairy_source_MainView_mc_177_34_179_12_stop:
+            goto @_Users_oliverkoeth_work_vert_fairy_source_MainView_mc_177_12_179_12_if_end;
+_Users_oliverkoeth_work_vert_fairy_source_MainView_mc_177_12_179_12_if_end:
+_Users_oliverkoeth_work_vert_fairy_source_MainView_mc_176_31_180_8_stop:
+        }
+    }
+}
+[ @file = "/Users/oliverkoeth/work/vert-fairy/source/MainView.mc"; @line = 1; ]
+<init> {
+}

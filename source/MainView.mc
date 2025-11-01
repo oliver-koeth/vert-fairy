@@ -22,18 +22,6 @@ module RawStep {
             _sessionService = sessionService;
             _accelActive = false;
             _lastUiUpdate = 0;
-            _hasAccelerometer = _checkAccelerometer();
-            setUpdatePeriod(1);
-        }
-
-        function _checkAccelerometer() {
-            if (Sensor == null) {
-                return false;
-            }
-            if (Sensor.respondsTo(:hasAccelerometer)) {
-                return Sensor.hasAccelerometer();
-            }
-            return true;
         }
 
         function onShow() {
@@ -54,24 +42,24 @@ module RawStep {
             var height = dc.getHeight();
             dc.clear();
             dc.setColor(Graphics.COLOR_WHITE, Graphics.COLOR_TRANSPARENT);
-            dc.drawText(width / 2, height * 0.2, Graphics.FONT_XLARGE, "Steps", Graphics.TEXT_JUSTIFY_CENTER);
-            dc.drawText(width / 2, height * 0.35, Graphics.FONT_NUMBER_TALL, _formatInt(_state[:steps]), Graphics.TEXT_JUSTIFY_CENTER);
+            dc.drawText(width / 2, height * 0.2, Graphics.FONT_LARGE, "Steps", Graphics.TEXT_JUSTIFY_CENTER);
+            dc.drawText(width / 2, height * 0.35, Graphics.FONT_NUMBER_HOT, _formatInt(_state[:steps]), Graphics.TEXT_JUSTIFY_CENTER);
 
-            dc.drawText(width / 2, height * 0.55, Graphics.FONT_XLARGE, "Distance (m)", Graphics.TEXT_JUSTIFY_CENTER);
+            dc.drawText(width / 2, height * 0.55, Graphics.FONT_LARGE, "Distance (m)", Graphics.TEXT_JUSTIFY_CENTER);
             dc.drawText(width / 2, height * 0.7, Graphics.FONT_NUMBER_MEDIUM, _formatDistance(_state[:distance]), Graphics.TEXT_JUSTIFY_CENTER);
 
-            var statusString = _state[:running] ? @Strings.StatusRunning : @Strings.StatusStopped;
+            var statusString = _state[:running] ? Application.loadResource(Rez.Strings.StatusRunning) : Application.loadResource(Rez.Strings.StatusStopped);
             dc.drawText(width / 2, height * 0.85, Graphics.FONT_LARGE, statusString, Graphics.TEXT_JUSTIFY_CENTER);
 
             if (!_hasAccelerometer) {
-                dc.drawText(width / 2, height * 0.92, Graphics.FONT_SMALL, @Strings.ErrorNoAccelerometer, Graphics.TEXT_JUSTIFY_CENTER);
+                dc.drawText(width / 2, height * 0.92, Graphics.FONT_SMALL, Application.loadResource(Rez.Strings.ErrorNoAccelerometer), Graphics.TEXT_JUSTIFY_CENTER);
             } else {
                 var error = _state[:sessionError];
                 if (error != null) {
                     dc.drawText(width / 2, height * 0.92, Graphics.FONT_SMALL, error, Graphics.TEXT_JUSTIFY_CENTER);
                 }
             }
-            _lastUiUpdate = System.getTicks();
+            _lastUiUpdate = System.getTimer();
         }
 
         function _formatInt(value) {
@@ -99,9 +87,6 @@ module RawStep {
         }
 
         function startActivity() {
-            if (!_hasAccelerometer) {
-                return;
-            }
             if (_state[:running]) {
                 return;
             }
@@ -134,36 +119,35 @@ module RawStep {
             if (_accelActive) {
                 return;
             }
-            if (!_hasAccelerometer) {
-                return;
-            }
-            var options = { :period => SAMPLE_PERIOD_MS };
-            if (Sensor.respondsTo(:setAccelerometerListener)) {
-                Sensor.setAccelerometerListener(method(:onAccelData), options);
-                _accelActive = true;
-            }
+            var options = { 
+                :period => SAMPLE_PERIOD_MS,
+                :accelerometer => {
+                    :enabled => true,       // Enable the accelerometer
+                    :sampleRate => 25       // 25 samples
+                }
+            };
+            Sensor.registerSensorDataListener(method(:onAccelData), options);
+            _accelActive = true;
         }
 
         function _unregisterAccelerometer() {
             if (!_accelActive) {
                 return;
             }
-            if (Sensor.respondsTo(:releaseAccelerometerListener)) {
-                Sensor.releaseAccelerometerListener();
-            }
+            Sensor.unregisterSensorDataListener();
             _accelActive = false;
         }
 
-        function onAccelData(samples) {
-            var newSteps = _detector.addSamples(samples);
+        function onAccelData(data as Sensor.SensorData)as Void {
+            var newSteps = _detector.addSamples(data);
             if (newSteps > 0) {
                 _state[:steps] += newSteps;
                 _state[:distance] = _state[:steps] * _state[:stepLength];
                 if (_sessionService != null) {
-                    _sessionService.updateMetrics(_state[:steps], _state[:distance]);
+                    //_sessionService.updateMetrics(_state[:steps], _state[:distance]);
                 }
             }
-            var now = System.getTicks();
+            var now = System.getTimer();
             if (now - _lastUiUpdate >= 900) {
                 WatchUi.requestUpdate();
             }

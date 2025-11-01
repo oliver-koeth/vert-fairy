@@ -1,16 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<iq:manifest xmlns:iq="http://www.garmin.com/xml/connectiq" version="4.1.5">
-    <iq:application id="com.vertfairy.rawstep" name="@Strings.AppName" type="watch-app">
+<iq:manifest xmlns:iq="http://www.garmin.com/xml/connectiq" version="1">
+    <iq:application id="bebaef60-9452-4d52-ba51-e8c9a96555fc" name="@Strings.AppName" type="watch-app" entry="RawStep.App" launcherIcon="@Drawables.LauncherIcon">
         <iq:products>
-            <iq:product id="fenix7xpro" />
+            <iq:product id="fenix7xpro"/>
         </iq:products>
         <iq:permissions>
-            <iq:uses-permission id="Sensor" />
-            <iq:uses-permission id="ActivityRecording" />
+            <iq:uses-permission id="Fit"/>
+            <iq:uses-permission id="Sensor"/>
         </iq:permissions>
         <iq:languages>
             <iq:language>en</iq:language>
+            <iq:language>eng</iq:language>
         </iq:languages>
-        <iq:entrypoint>RawStep::App</iq:entrypoint>
+        <!--<iq:entrypoint>RawStep::App</iq:entrypoint>-->
+        <iq:barrels/>
     </iq:application>
 </iq:manifest>

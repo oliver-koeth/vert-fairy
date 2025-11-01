@@ -5,8 +5,18 @@ Raw Step Activity is a Connect IQ watch app that tracks steps and distance from 
 ## Requirements
 
 - Garmin Connect IQ SDK 4.1 or newer
+- ConnectIQ SDK Manager CLI from https://github.com/lindell/connect-iq-sdk-manager-cli
 - `monkeyc`, `monkeydo`, and the Connect IQ simulator included with the SDK
 - A fenix 7 family device profile (e.g., `fenix7xpro`) installed in the simulator
+
+Installed devices can be queried as follows
+
+    ```sh
+    brew install lindell/connect-iq-sdk-manager-cli/connect-iq-sdk-manager-cli
+    ```
+
+Current SDK version: `8.3.0` and device `fenix7xpro`
+
 
 ## Project Structure
 

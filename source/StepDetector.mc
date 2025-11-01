@@ -65,6 +65,14 @@ module RawStep {
             return _stepCount;
         }
 
+        function abs(x) {
+            return (x < 0) ? -x : x;
+        }
+
+        function max(a, b) {
+            return (a > b) ? a : b;
+        }
+
         /**
          * Adds a batch of accelerometer samples. Returns the number of detected steps in the batch.
          */
@@ -73,7 +81,9 @@ module RawStep {
                 return 0;
             }
             var newSteps = 0;
-            foreach (var sample in samples) {
+            var sampleCount = samples.size();
+            for (var i = 0; i < sampleCount; i += 1) {
+                var sample = samples[i];
                 if (sample == null) {
                     continue;
                 }
@@ -127,14 +137,14 @@ module RawStep {
                     _avgMag += _alpha * (magnitude - _avgMag);
                 }
 
-                var deviation = Math.abs(magnitude - _avgMag);
+                var deviation = abs(magnitude - _avgMag);
                 if (_avgDeviation == null) {
                     _avgDeviation = deviation;
                 } else {
                     _avgDeviation += _beta * (deviation - _avgDeviation);
                 }
 
-                var dynamicThreshold = _avgMag + Math.max(_minThreshold, _sensitivity * (_avgDeviation != null ? _avgDeviation : 0));
+                var dynamicThreshold = _avgMag + max(_minThreshold, _sensitivity * (_avgDeviation != null ? _avgDeviation : 0));
                 var above = magnitude > dynamicThreshold;
                 if (above && !_lastAboveThreshold) {
                     if (_lastSampleTimestamp == null || (timestamp - _lastStepTimestamp) >= _refractoryMs) {
