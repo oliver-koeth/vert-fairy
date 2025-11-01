@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<settings>
+    <setting id="step_length" type="number">
+        <default>1.0</default>
+        <label>Step Length (m)</label>
+        <description>Average step length used to estimate distance.</description>
+        <constraints>
+            <min>0.2</min>
+            <max>2.0</max>
+            <step>0.05</step>
+        </constraints>
+    </setting>
+</settings>

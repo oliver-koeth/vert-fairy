@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<strings>
+    <string id="AppName">Raw Step Activity</string>
+    <string id="StatusRunning">Running</string>
+    <string id="StatusStopped">Stopped</string>
+    <string id="ErrorNoAccelerometer">Accelerometer unavailable</string>
+    <string id="ErrorActivityRecording">Activity recording unavailable</string>
+</strings>
