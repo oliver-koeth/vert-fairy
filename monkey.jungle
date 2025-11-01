@@ -1,0 +1,18 @@
+project.manifest = "manifest.xml"
+project.output = "bin/RawStepActivity.prg"
+
+project.sourcePaths = [
+    "source"
+]
+
+project.resourcePaths = [
+    "resources"
+]
+
+project.testPaths = [
+    "tests"
+]
+
+project.products = [
+    { :name => "fenix7xpro", :deviceId => "fenix7xpro" }
+]
